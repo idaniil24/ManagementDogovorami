@@ -1,0 +1,40 @@
+﻿<Window x:Class="ManagementDogovorami.MainScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManagementDogovorami"
+        mc:Ignorable="d"
+        Title="MainScreen" Height="800" Width="1100">
+    <Grid>
+        <Grid Width="120" Height="auto" HorizontalAlignment="Left">
+            <Rectangle Width="120" Height="784">
+                <Rectangle.Fill>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#52C7D7" Offset="0"/>
+                        <GradientStop Color="#1873C8" Offset="0.6"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <StackPanel Width="auto" Height="auto" Orientation="Vertical">
+                <Rectangle Width="80" Height="80" RadiusX="50" RadiusY="50" Margin="0,20,0,0">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="White"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <StackPanel Width="auto" Height="1" Background="White" Margin="20"/>
+
+                <Button Margin="0,30,0,0" Background="Transparent" BorderThickness="0" Click="MoveToDogovoraPage">
+                    <Image Source="/res/Union.png" Width="60" />
+                </Button>
+
+                <Button Background="Transparent" Margin="0,400,0,0" Click="MoveToProfilePage" BorderThickness="0">
+                    <Image Source="/res/acounticon.png" Width="90" Height="90"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Frame Width="975" HorizontalAlignment="Right" x:Name="MainFrame" NavigationUIVisibility="Hidden">
+            
+        </Frame>
+    </Grid>
+</Window>
