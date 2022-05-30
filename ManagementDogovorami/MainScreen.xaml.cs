@@ -28,12 +28,25 @@ namespace ManagementDogovorami
 
         private void MoveToProfilePage(object sender, RoutedEventArgs e)
         {
-
+            FrameManager.MainFrame.Navigate(new ProfilePage());
         }
 
         private void MoveToDogovoraPage(object sender, RoutedEventArgs e)
         {
-
+            FrameManager.MainFrame.Navigate(new DogovoraPage());
         }
+
+        private void MoveToClientsPage(object sender, MouseButtonEventArgs e)
+        {
+            FrameManager.MainFrame.Navigate(new ClientsPage());
+        }        
+
+        public static void CloseApp()
+        {
+
+            //this.Close();
+            //this.Hide();
+        }
+
     }
 }

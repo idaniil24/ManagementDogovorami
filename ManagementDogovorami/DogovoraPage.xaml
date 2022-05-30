@@ -7,73 +7,158 @@
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="980"
       Background="#E2E2E2"
-      Title="DogovoraPage">
+      Title="Договора">
 
     <Grid>
-        <StackPanel Width="auto" Height="90" Background="#FAFAFA" VerticalAlignment="Top" Orientation="Horizontal">
-            <TextBlock Text="Договора" FontSize="40" TextAlignment="Center" VerticalAlignment="Center" Margin="20,0,0,0"/>
-            <Border CornerRadius="7"
-                    Margin="20,0,0,0"
-                    Width="500"
-                    Height="50"
-                    BorderBrush="#FFABADB3" 
-                    BorderThickness="1" 
-                    VerticalAlignment="Center" 
-                    UseLayoutRounding="True">
-                <TextBox Margin="20,0,0,0" BorderThickness="0" Background="Transparent" Text="Поиск по договорам" FontSize="20" VerticalAlignment="Center"/>
-            </Border>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Column="0">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="#FAFAFA"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <StackPanel Grid.Column="0" Orientation="Horizontal">
+            <TextBlock Text="Договора" VerticalAlignment="Center" 
+                       FontSize="40" Margin="40,0,0,0"/>
+            <Border CornerRadius="25"
+                    Margin="40,0,0,0"
+                            BorderThickness="1"
+                    VerticalAlignment="Center"
+                            BorderBrush="Black"
+                            Background="Transparent" Height="57" Width="500">
+                <Grid>
+                    <TextBox VerticalAlignment="Bottom"
+                                     VerticalContentAlignment="Center"
+                                     x:Name="CustomTextBox"
+                                     TextWrapping="Wrap"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     FontSize="20"
+                                     Foreground="Gray"
+                                     CaretBrush="Gray"
+                                     Margin="40,0,0,0" Height="58">
+                        <TextBox.Text>
+                            <Binding Path="Login">
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <TextBlock IsHitTestVisible="False"
+                                       Text="Поиск по договору"
+                                       FontSize="20"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="40,0,0,0"
+                                       Foreground="Gray" Width="439">
 
-            <Button Margin="0,0,0,0" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" Width="70" Height="70">
-                <Image Source="/res/elipseplus.png" />
-            </Button>
-        </StackPanel>
-        <StackPanel Width="auto" Height="710" Margin="0,90,0,0">
-            <Border CornerRadius="25"
-                        Width="900"
-                        Background="White"
-                        Margin="0,40,0,0"
-                        Height="250">
-                <StackPanel 
-                        Orientation="Horizontal"
-                        Background="Transparent">
-                    <Image Source="/res/Avatar.png" Width="160" Height="160" HorizontalAlignment="Left" Margin="40"/>
-                    <StackPanel Orientation="Vertical" Height="200" Width="300"  Margin="0,50,0,0">
-                        <TextBlock Text="№Догвора" FontSize="25"/>
-                        <TextBlock Text="Тип договора" FontSize="25"/>
-                        <StackPanel Width="200" Height="2" HorizontalAlignment="Left"
-                                    Margin="0,10,0,0"
-                                    Background="Gray"/>
-                        <TextBlock Text="ФИО клиента" FontSize="25"/>
-                        <TextBlock Text="Номер телефона клиента" FontSize="25"/>
-                    </StackPanel>
-                    <Button Width="50" Height="50" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" Margin="250,0,0,0">
-                        <Image Source="/res/4781858_arrow_arrows_back_direction_left_icon.png" HorizontalAlignment="Right"/>
-                    </Button>
-                </StackPanel>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=CustomTextBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
             </Border>
-            <Border CornerRadius="25"
-                        Width="900"
-                        Background="White"
-                        Margin="0,40,0,0"
-                        Height="250">
-                <StackPanel 
-                        Orientation="Horizontal"
-                        Background="Transparent">
-                    <Image Source="/res/Avatar.png" Width="160" Height="160" HorizontalAlignment="Left" Margin="40"/>
-                    <StackPanel Orientation="Vertical" Height="200" Width="300" Margin="0,50,0,0">
-                        <TextBlock Text="№Догвора" FontSize="25"/>
-                        <TextBlock Text="Тип договора" FontSize="25"/>
-                        <StackPanel Width="200" Height="2" HorizontalAlignment="Left"
-                                    Margin="0,10,0,0"
-                                    Background="Gray"/>
-                        <TextBlock Text="ФИО клиента" FontSize="25"/>
-                        <TextBlock Text="Номер телефона клиента" FontSize="25"/>
-                    </StackPanel>
-                    <Button Width="50" Height="50" Background="Transparent" BorderBrush="Transparent" HorizontalAlignment="Right" Margin="250,0,0,0">
-                        <Image Source="/res/4781858_arrow_arrows_back_direction_left_icon.png" HorizontalAlignment="Right"/>
-                    </Button>
-                </StackPanel>
+            <Border Width="50" 
+                    Height="50" 
+                    Margin="40,0,0,0"
+                    Background="#F1F1F1" 
+                    CornerRadius="100" 
+                    BorderThickness="1"
+                    BorderBrush="Black">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#5EB9E9"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Image Source="/res/elipseplus.png"/>
             </Border>
         </StackPanel>
+
+        <ListView Grid.Row="1" x:Name="LWContracts"
+                  HorizontalAlignment="Left"
+                  Background="#E2E2E2" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Grid.Row="1" Width="auto" Height="220" Margin="0,5,0,5">
+                        <Border Background="White" Grid.ColumnSpan="2" Margin="20,0,20,0" CornerRadius="25" Padding="20" Width="920">
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Grid.Column="0" Width="150" Height="150">
+                                    <Image.Source>
+                                        <Binding Path="Clients.Image">
+                                            <Binding.TargetNullValue>
+                                                <ImageSource>
+                                                    res/Avatar.png
+                                                </ImageSource>
+                                            </Binding.TargetNullValue>
+                                        </Binding>
+                                    </Image.Source>
+                                </Image>
+
+                                <StackPanel Grid.Column="1"                                         
+                                            HorizontalAlignment="Left"
+                                            Orientation="Horizontal" 
+                                            Width="650">
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="20,0,0,0" Width="550">
+                                        <TextBlock Text="{Binding ID, StringFormat={}Номер договора: {0}}" FontSize="27"/>
+                                        <TextBlock Text="{Binding Types.Name}" FontSize="27"/>
+                                        <StackPanel Height="2" Width="250" Background="#828282" HorizontalAlignment="Left" Margin="5,10,0,0"/>
+                                        <TextBlock FontSize="27">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{} {0} {1} {2} | {3}">
+                                                    <Binding Path="Clients.First_name"/>
+                                                    <Binding Path="Clients.Second_name"/>
+                                                    <Binding Path="Clients.Last_name"/>
+                                                    <Binding Path="Clients.Company_name"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Clients.phone_number,StringFormat={} Номер клиента: {0}}" FontSize="27"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <TextBlock Text="{Binding Price, StringFormat={}Сумма по догвоору: {0}}" FontSize="20"/>
+                                            <TextBlock Text="Оплаченно: 500000" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <Border Width="60" Height="60"
+                                            Margin="10,0,0,0"
+                                            Background="#C4C4C4" 
+                                            HorizontalAlignment="Right"
+                                            CornerRadius="100" 
+                                            BorderThickness="1">
+                                        <Border.Style>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#5EB9E9"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <Image Source="/res/arrowicon.png"/>
+                                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
