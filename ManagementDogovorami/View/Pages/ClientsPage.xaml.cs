@@ -16,16 +16,15 @@ using System.Windows.Shapes;
 namespace ManagementDogovorami
 {
     /// <summary>
-    /// Логика взаимодействия для DogovoraPage.xaml
+    /// Логика взаимодействия для ClientsPage.xaml
     /// </summary>
-    public partial class DogovoraPage : Page
+    public partial class ClientsPage : Page
     {
-        public DogovoraPage()
+        public ClientsPage()
         {
-            var currentContracts = ydodbEntities.GetContext().Contracts.ToList();
+            var currentClients = ydodbEntities1.GetContext().Clients.ToList();
             InitializeComponent();
-            LWContracts.ItemsSource = currentContracts;
-            LWContracts.SelectedIndex = currentContracts.Count; 
+            LWClients.ItemsSource = currentClients;
         }
     }
 }

@@ -15,12 +15,12 @@ namespace ManagementDogovorami
     public partial class Contracts
     {
         public int ID { get; set; }
-        public decimal Price { get; set; }
-        public decimal Avance { get; set; }
-        public Nullable<decimal> First_part { get; set; }
-        public Nullable<decimal> Second_part { get; set; }
-        public Nullable<decimal> Third_part { get; set; }
-        public Nullable<decimal> Fourth_part { get; set; }
+        public string Price { get; set; }
+        public string Avance { get; set; }
+        public string First_part { get; set; }
+        public string Second_part { get; set; }
+        public string Third_part { get; set; }
+        public string Fourth_part { get; set; }
         public System.DateTime Avance_date { get; set; }
         public Nullable<System.DateTime> First_part_date { get; set; }
         public Nullable<System.DateTime> Second_part_date { get; set; }
@@ -28,6 +28,9 @@ namespace ManagementDogovorami
         public int Client_id { get; set; }
         public int Manager_id { get; set; }
         public int Type_id { get; set; }
+        public string Payded { get; set; }
+        public Nullable<int> Parts_count { get; set; }
+        public Nullable<System.DateTime> Third_part_date { get; set; }
     
         public virtual Clients Clients { get; set; }
         public virtual Manager Manager { get; set; }

@@ -8,6 +8,7 @@ namespace ManagementDogovorami
 {
      class ManagerSaver
     {
+        public static int ID { get; set; }  
         public static string Login { get; set; }
         public static string First_name { get; set; }   
         public static string Second_name { get; set; }

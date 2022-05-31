@@ -40,13 +40,7 @@
 
                                 <Image Grid.Column="0" Width="150" Height="150">
                                     <Image.Source>
-                                        <Binding Path="Image">
-                                            <Binding.TargetNullValue>
-                                                <ImageSource>
-                                                    res/Avatar.png
-                                                </ImageSource>
-                                            </Binding.TargetNullValue>
-                                        </Binding>
+                                          /res/Avatar.png
                                     </Image.Source>
                                 </Image>
 

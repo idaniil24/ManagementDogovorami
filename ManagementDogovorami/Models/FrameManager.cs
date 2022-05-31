@@ -10,5 +10,7 @@ namespace ManagementDogovorami
     class FrameManager
     {
         public static Frame MainFrame { get; set; }
+        public static MainWindow MainWindow { get; set; }
+        public static MainScreen MainScreen { get; set; }
     }
 }

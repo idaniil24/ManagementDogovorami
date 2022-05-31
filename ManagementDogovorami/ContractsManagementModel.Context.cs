@@ -15,22 +15,23 @@ namespace ManagementDogovorami
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class ydodbEntities : DbContext
+    public partial class ydodbEntities1 : DbContext
     {
-        private static ydodbEntities _context;
-        public ydodbEntities()
-            : base("name=ydodbEntities")
+        private static ydodbEntities1 _context;
+        public ydodbEntities1()
+            : base("name=ydodbEntities1")
         {
         }
-
-        public static ydodbEntities GetContext()
+        
+        public static ydodbEntities1 GetContext()
         {
-            if( _context == null )
-                _context = new ydodbEntities();
+            if (_context==null)
+            {
+                _context=new ydodbEntities1();
+            }
             return _context;
         }
 
-    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

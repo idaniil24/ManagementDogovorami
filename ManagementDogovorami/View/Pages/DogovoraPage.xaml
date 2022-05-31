@@ -66,6 +66,7 @@
                 </Grid>
             </Border>
             <Border Width="50" 
+                    
                     Height="50" 
                     Margin="40,0,0,0"
                     Background="#F1F1F1" 
@@ -81,7 +82,7 @@
                         </Style.Triggers>
                     </Style>
                 </Border.Style>
-                <Image Source="/res/elipseplus.png"/>
+                <Image Source="/res/elipseplus.png" MouseDown="moveToAddContract"/>
             </Border>
         </StackPanel>
 
@@ -99,16 +100,8 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Image Grid.Column="0" Width="150" Height="150">
-                                    <Image.Source>
-                                        <Binding Path="Clients.Image">
-                                            <Binding.TargetNullValue>
-                                                <ImageSource>
-                                                    res/Avatar.png
-                                                </ImageSource>
-                                            </Binding.TargetNullValue>
-                                        </Binding>
-                                    </Image.Source>
+                                <Image Grid.Column="0" Width="150" Height="150" Source="/res/Avatar.png" >
+
                                 </Image>
 
                                 <StackPanel Grid.Column="1"                                         
@@ -138,6 +131,7 @@
 
                                     <Border Width="60" Height="60"
                                             Margin="10,0,0,0"
+                                            MouseDown="MoveToShowContract"
                                             Background="#C4C4C4" 
                                             HorizontalAlignment="Right"
                                             CornerRadius="100" 

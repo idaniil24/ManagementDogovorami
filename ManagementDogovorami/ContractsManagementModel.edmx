@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ydodbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ydodbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ID" />
@@ -22,19 +22,22 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="Avance" Type="decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="First_part" Type="decimal" Precision="16" Scale="2" />
-          <Property Name="Second_part" Type="decimal" Precision="16" Scale="2" />
-          <Property Name="Third_part" Type="decimal" Precision="16" Scale="2" />
-          <Property Name="Fourth_part" Type="decimal" Precision="16" Scale="0" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Avance" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="First_part" Type="nvarchar" MaxLength="50" />
+          <Property Name="Parts_count" Type="int" />
+          <Property Name="Second_part" Type="nvarchar" MaxLength="50" />
+          <Property Name="Third_part" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fourth_part" Type="nvarchar" MaxLength="50" />
           <Property Name="Avance_date" Type="date" Nullable="false" />
           <Property Name="First_part_date" Type="date" />
           <Property Name="Second_part_date" Type="date" />
+          <Property Name="Third_part_date" Type="date" />
           <Property Name="Fourth_part_date" Type="date" />
           <Property Name="Client_id" Type="int" Nullable="false" />
           <Property Name="Manager_id" Type="int" Nullable="false" />
           <Property Name="Type_id" Type="int" Nullable="false" />
+          <Property Name="Payded" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Manager">
           <Key>
@@ -152,8 +155,7 @@
             <End Role="Contracts" EntitySet="Contracts" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ydodbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -175,12 +177,12 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Price" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="Avance" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="First_part" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="Second_part" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="Third_part" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="Fourth_part" Type="Decimal" Precision="16" Scale="0" />
+          <Property Name="Price" Type="String" Nullable="false" />
+          <Property Name="Avance" Type="String" Nullable="false" />
+          <Property Name="First_part" Type="String" />
+          <Property Name="Second_part" Type="String" />
+          <Property Name="Third_part" Type="String" />
+          <Property Name="Fourth_part" Type="String" />
           <Property Name="Avance_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="First_part_date" Type="DateTime" Precision="0" />
           <Property Name="Second_part_date" Type="DateTime" Precision="0" />
@@ -191,6 +193,9 @@
           <NavigationProperty Name="Clients" Relationship="Self.FK_Contracts_Clients" FromRole="Contracts" ToRole="Clients" />
           <NavigationProperty Name="Manager" Relationship="Self.FK_Contracts_Manager" FromRole="Contracts" ToRole="Manager" />
           <NavigationProperty Name="Types" Relationship="Self.FK_Contracts_Types" FromRole="Contracts" ToRole="Types" />
+          <Property Name="Payded" Type="String" />
+          <Property Name="Parts_count" Type="Int32" />
+          <Property Name="Third_part_date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Manager">
           <Key>
@@ -260,7 +265,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ydodbEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ydodbEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clients" EntityType="Self.Clients" />
           <EntitySet Name="Contracts" EntityType="Self.Contracts" />
           <EntitySet Name="Manager" EntityType="Self.Manager" />
@@ -325,7 +330,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ydodbModelContainer" CdmEntityContainer="ydodbEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ydodbModelContainer" CdmEntityContainer="ydodbEntities1">
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="ydodbModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
@@ -342,6 +347,9 @@
           <EntitySetMapping Name="Contracts">
             <EntityTypeMapping TypeName="ydodbModel.Contracts">
               <MappingFragment StoreEntitySet="Contracts">
+                <ScalarProperty Name="Third_part_date" ColumnName="Third_part_date" />
+                <ScalarProperty Name="Parts_count" ColumnName="Parts_count" />
+                <ScalarProperty Name="Payded" ColumnName="Payded" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Avance" ColumnName="Avance" />

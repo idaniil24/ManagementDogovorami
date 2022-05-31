@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="de494881d2fc4277a168d66abe30ef72" Name="Diagram1">
+      <Diagram DiagramId="de4c793e00be48f692f7900c45a90272" Name="Diagram1" ZoomLevel="159">
         <EntityTypeShape EntityType="ydodbModel.Clients" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ydodbModel.Contracts" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ydodbModel.Manager" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />

@@ -47,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
@@ -67,52 +68,83 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Clients.cs">
-      <DependentUpon>MDVModel.tt</DependentUpon>
+    <Compile Include="View\Pages\AddContractPage.xaml.cs">
+      <DependentUpon>AddContractPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ClientsPage.xaml.cs">
+    <Compile Include="Clients.cs">
+      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\ClientsPage.xaml.cs">
       <DependentUpon>ClientsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Contracts.cs">
-      <DependentUpon>MDVModel.tt</DependentUpon>
+      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Manager.cs">
-      <DependentUpon>MDVModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ManagerSaver.cs" />
-    <Compile Include="MDVModel.cs">
+    <Compile Include="ContractsManagementModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MDVModel.tt</DependentUpon>
+      <DependentUpon>ContractsManagementModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProfilePage.xaml.cs">
+    <Compile Include="ContractsManagementModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContractsManagementModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ContractsManagementModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager.cs">
+      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ManagerSaver.cs" />
+    <Compile Include="View\Pages\ContractPage.xaml.cs">
+      <DependentUpon>ContractPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\EditContractPage.xaml.cs">
+      <DependentUpon>EditContractPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>MDVModel.tt</DependentUpon>
+      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>MDVModel.tt</DependentUpon>
+      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>MDVModel.tt</DependentUpon>
+      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Types.cs">
-      <DependentUpon>MDVModel.tt</DependentUpon>
+      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
     </Compile>
-    <Page Include="ClientsPage.xaml">
+    <Page Include="View\Pages\AddContractPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DogovoraPage.xaml">
+    <Page Include="View\Pages\ClientsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainScreen.xaml">
+    <Page Include="View\Pages\ContractPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\Pages\DogovoraPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\EditContractPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\MainScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -120,18 +152,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DogovoraPage.xaml.cs">
+    <Compile Include="View\Pages\DogovoraPage.xaml.cs">
       <DependentUpon>DogovoraPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FrameManager.cs" />
-    <Compile Include="MainScreen.xaml.cs">
+    <Compile Include="Models\FrameManager.cs" />
+    <Compile Include="View\Windows\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ProfilePage.xaml">
+    <Page Include="View\Pages\ProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,16 +177,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MDVModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MDVModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MDVModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MDVModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -172,12 +194,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="MDVModel.edmx">
+    <EntityDeploy Include="ContractsManagementModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MDVModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ContractsManagementModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="MDVModel.edmx.diagram">
-      <DependentUpon>MDVModel.edmx</DependentUpon>
+    <None Include="ContractsManagementModel.edmx.diagram">
+      <DependentUpon>ContractsManagementModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -192,18 +214,18 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MDVModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MDVModel.Context.cs</LastGenOutput>
-      <DependentUpon>MDVModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="MDVModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MDVModel.edmx</DependentUpon>
-      <LastGenOutput>MDVModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="res\IconApp.png" />
     <Resource Include="res\3030708_group_groups_members_team_icon 1.png" />
+    <Content Include="ContractsManagementModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ContractsManagementModel.edmx</DependentUpon>
+      <LastGenOutput>ContractsManagementModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ContractsManagementModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ContractsManagementModel.edmx</DependentUpon>
+      <LastGenOutput>ContractsManagementModel.cs</LastGenOutput>
+    </Content>
     <Content Include="res\352468_arrow_right_icon 1.svg" />
     <Resource Include="res\4781858_arrow_arrows_back_direction_left_icon.png" />
     <Resource Include="res\arrowicon.png" />
@@ -215,6 +237,7 @@
     <Content Include="res\dogovorsvg.svg" />
     <Resource Include="res\Union.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

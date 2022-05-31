@@ -44,8 +44,6 @@ namespace ManagementDogovorami
         public static void CloseApp()
         {
 
-            //this.Close();
-            //this.Hide();
         }
 
     }

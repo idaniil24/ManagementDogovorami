@@ -32,15 +32,8 @@ namespace ManagementDogovorami
         }
         private void moveToLogin(object sender, MouseButtonEventArgs e)
         {
-            MainScreen mainScreen = new MainScreen();
-            mainScreen.Close();
-            Application.Current.MainWindow.Close();
-            //mainScreen.CloseApp();
-            Application.Current.MainWindow = mainScreen;
-            Application.Current.MainWindow.Close();
-            mainScreen.Hide();
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            FrameManager.MainScreen.Close();
+            FrameManager.MainWindow.Show();
         }
 
     }

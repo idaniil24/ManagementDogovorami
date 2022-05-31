@@ -28,6 +28,7 @@ namespace ManagementDogovorami
             DataContext = this;
             login = LoginTextBox.Text;
             password = PasswordTextBox.Text;
+            FrameManager.MainWindow = this;
         }
 
         private void MoveToMainScreen(object sender, RoutedEventArgs e)
@@ -45,23 +46,26 @@ namespace ManagementDogovorami
                 MessageBox.Show("Введите пароль!");
                 return;
             }
-            else if (ydodbEntities.GetContext().Manager.Where(x => x.Login == login && x.Password == password).Count() == 0)
+            else if (ydodbEntities1.GetContext().Manager.Where(x => x.Login == login && x.Password == password).Count() == 0)
             {
                 MessageBox.Show("Такого пользователя не существует!");
                 return;
             }
             else
             {
-                manager = ydodbEntities.GetContext().Manager.Where(x => x.Login == login && x.Password == password).First();
+                manager = ydodbEntities1.GetContext().Manager.Where(x => x.Login == login && x.Password == password).First();
                 ManagerSaver.Login = login;
                 ManagerSaver.First_name = manager.First_name.ToString();
                 ManagerSaver.Second_name = manager.Second_name.ToString();
                 ManagerSaver.Last_name = manager.Last_name.ToString();
                 ManagerSaver.Phone_number = manager.Phone.ToString();
-
+                ManagerSaver.ID = manager.ID;
                 MainScreen mainScreen = new MainScreen();
-                mainScreen.Show();
-                this.Hide();
+                FrameManager.MainScreen = mainScreen;
+                FrameManager.MainScreen.Show();
+                FrameManager.MainWindow.Hide();
+                LoginTextBox.Text = "Логин";
+                PasswordTextBox.Text = "Пароль";
             }
         }
 

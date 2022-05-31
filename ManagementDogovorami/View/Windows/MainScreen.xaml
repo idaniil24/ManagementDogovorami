@@ -5,6 +5,7 @@
         Icon="/res/IconApp.png"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ManagementDogovorami"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         Title="Главный экран" Height="800" Width="1100">
@@ -22,11 +23,8 @@
             </Rectangle.Fill>
         </Rectangle>
         <StackPanel Grid.Column="0" Orientation="Vertical">
-            <Rectangle RadiusX="50" RadiusY="50" Width="75" Height="75" Margin="0,20,0,0">
-                <Rectangle.Fill>
-                    <SolidColorBrush Color="White"/>
-                </Rectangle.Fill>
-            </Rectangle>
+            <Image Source="/res/IconApp.png" Width="85" Height="85" Margin="0,20,0,0"/>
+
             <StackPanel Width="85" Height="1" Background="White" Margin="0,20,0,0"/>
             <Border Width="120" Height="90"
                      MouseDown="MoveToDogovoraPage"
@@ -41,6 +39,7 @@
                     </Style>
                 </Border.Style>
                 <Image Source="/res/Union.png" Width="70" Height="70"/>
+                
             </Border>
             
             <Border Width="120" Height="90"
