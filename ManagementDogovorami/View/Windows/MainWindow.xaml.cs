@@ -27,14 +27,14 @@ namespace ManagementDogovorami
             InitializeComponent();
             DataContext = this;
             login = LoginTextBox.Text;
-            password = PasswordTextBox.Text;
+            password = PasswordTextBox.Password;
             FrameManager.MainWindow = this;
         }
 
         private void MoveToMainScreen(object sender, RoutedEventArgs e)
         {
             login = LoginTextBox.Text;
-            password = PasswordTextBox.Text;
+            password = PasswordTextBox.Password;
             Manager manager;
             if (string.IsNullOrWhiteSpace(login))
             {
@@ -65,7 +65,8 @@ namespace ManagementDogovorami
                 FrameManager.MainScreen.Show();
                 FrameManager.MainWindow.Hide();
                 LoginTextBox.Text = "Логин";
-                PasswordTextBox.Text = "Пароль";
+                passwordlable.Text = "Пароль";
+                PasswordTextBox.Password = null;
             }
         }
 
@@ -83,14 +84,20 @@ namespace ManagementDogovorami
 
         private void nullpassword(object sender, RoutedEventArgs e)
         {
-            if(PasswordTextBox.Text == "Пароль")
-                PasswordTextBox.Clear();
+            if (PasswordTextBox.Password == null)
+                passwordlable.Text = "Пароль";
+
+            if (PasswordTextBox.Password != null)
+                passwordlable.Text = "";
         }
 
         private void passwordclear(object sender, RoutedEventArgs e)
         {
-            if (PasswordTextBox.Text == "")
-                PasswordTextBox.Text = "Пароль";
+            if (PasswordTextBox.Password != null)
+                passwordlable.Text = "";
+
+            if (PasswordTextBox.Password == null)
+                passwordlable.Text = "Пароль";
         }
     }
 }

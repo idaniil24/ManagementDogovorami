@@ -23,6 +23,7 @@
             <TextBlock Text="Клиенты" VerticalAlignment="Center" 
                        FontSize="40" Margin="40,0,0,0"/>
             
+            
         </StackPanel>
 
         <ListView Grid.Row="1" x:Name="LWClients"
