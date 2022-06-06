@@ -15,23 +15,22 @@ namespace ManagementDogovorami
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class ydodbEntities1 : DbContext
+    public partial class CM_Entities : DbContext
     {
-        private static ydodbEntities1 _context;
-        public ydodbEntities1()
-            : base("name=ydodbEntities1")
+        public static CM_Entities _context;
+        public CM_Entities()
+            : base("name=CM_Entities")
         {
         }
-        
-        public static ydodbEntities1 GetContext()
+        public static CM_Entities GetContext()
         {
             if (_context==null)
             {
-                _context=new ydodbEntities1();
+                _context = new CM_Entities();
             }
             return _context;
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -39,7 +38,11 @@ namespace ManagementDogovorami
     
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Contracts> Contracts { get; set; }
+        public virtual DbSet<Currencies> Currencies { get; set; }
         public virtual DbSet<Manager> Manager { get; set; }
+        public virtual DbSet<Parts> Parts { get; set; }
+        public virtual DbSet<Payded> Payded { get; set; }
+        public virtual DbSet<Statuses> Statuses { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Types> Types { get; set; }
     

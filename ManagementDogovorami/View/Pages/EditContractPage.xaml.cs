@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,6 +22,7 @@ namespace ManagementDogovorami.View.Pages
     public partial class EditContractPage : Page
     {
         private Contracts _currentContranct = new Contracts();
+        private Parts[] parts;
         public EditContractPage(Contracts contract)
         {
             InitializeComponent();
@@ -32,28 +34,61 @@ namespace ManagementDogovorami.View.Pages
             ComboPartsEdit.Items.Add("4");
             TypeDogovoraEdit.SelectedIndex = 0;
 
-            ComboClientsEdit.ItemsSource = ydodbEntities1.GetContext().Clients.ToList();
+            ComboPartsEdit.SelectedIndex = (int)contract.Parts_count-1;
 
-            TypeDogovoraEdit.ItemsSource = ydodbEntities1.GetContext().Types.ToList();
+            ComboClientsEdit.ItemsSource = CM_Entities.GetContext().Clients.ToList();
 
-            TBManagerEdit.ItemsSource = ydodbEntities1.GetContext().Manager.Where(x => x.ID == ManagerSaver.ID).ToList();
+            TypeDogovoraEdit.ItemsSource = CM_Entities.GetContext().Types.ToList();
+
+            TBManagerEdit.ItemsSource = CM_Entities.GetContext().Manager.Where(x => x.ID == ManagerSaver.ID).ToList();
 
             TBManagerEdit.SelectedIndex = 0;
 
-            if (contract == null)
-                DataContext = _currentContranct;
-            else
-                DataContext = contract;
+            DataContext = contract;
+            _currentContranct = contract;
 
+            parts = contract.Parts.ToArray();
+            MessageBox.Show(parts.Count().ToString());
+            MessageBox.Show(parts.ToString());
+            switch (parts.Count())
+            {
+                case 1:
+                    First_part_date.SelectedDate = parts[0].Pay_day;
+                    TBFirstpart.Text = parts[0].Price.ToString();
+                    //part.Contract_id = currentContract.ID;
+                    break;
+                case 2:
 
-            if (contract.Parts_count.ToString() == "1")
-                ComboPartsEdit.SelectedIndex = 0;
-            if (contract.Parts_count.ToString() == "2")
-                ComboPartsEdit.SelectedIndex = 1;
-            if (contract.Parts_count.ToString() == "3")
-                ComboPartsEdit.SelectedIndex = 2;
-            if (contract.Parts_count.ToString() == "4")
-                ComboPartsEdit.SelectedIndex = 3;
+                    First_part_date.SelectedDate = parts[0].Pay_day;
+                    TBFirstpart.Text = parts[0].Price.ToString();
+
+                    Second_part_date.SelectedDate = parts[1].Pay_day;
+                    TBSecondpart.Text = parts[1].Price.ToString();
+                    break;
+                case 3:
+                    First_part_date.SelectedDate = parts[0].Pay_day;
+                    TBFirstpart.Text = parts[0].Price.ToString();
+
+                    Second_part_date.SelectedDate = parts[1].Pay_day;
+                    TBSecondpart.Text = parts[1].Price.ToString();
+
+                    Third_part_date.SelectedDate = parts[2].Pay_day;
+                    TBThirdpart.Text = parts[2].Price.ToString();
+                    break;
+                case 4:
+                    First_part_date.SelectedDate = parts[0].Pay_day;
+                    TBFirstpart.Text = parts[0].Price.ToString();
+
+                    Second_part_date.SelectedDate = parts[1].Pay_day;
+                    TBSecondpart.Text = parts[1].Price.ToString();
+
+                    Third_part_date.SelectedDate = parts[2].Pay_day;
+                    TBThirdpart.Text = parts[2].Price.ToString();
+
+                    Fourth_part_edit.SelectedDate = parts[3].Pay_day;
+                    TBFourthpart.Text = parts[3].Price.ToString();
+                    break;
+            }
         }
 
         private void MoveToDogovoraPage(object sender, RoutedEventArgs e)
@@ -62,7 +97,6 @@ namespace ManagementDogovorami.View.Pages
         }
         private void visibilitychanged(object sender, SelectionChangedEventArgs e)
         {
-
             if (ComboPartsEdit.SelectedIndex == 0)
             {
                 seconndvisibility.Visibility = Visibility.Hidden;
@@ -93,6 +127,50 @@ namespace ManagementDogovorami.View.Pages
         }
         private void EditContract_Click(object sender, RoutedEventArgs e)
         {
+                int index = ComboPartsEdit.SelectedIndex;
+                _currentContranct.Avance_date = (DateTime)AvanceDate.SelectedDate;
+
+                switch (index)
+                {
+                    case 0:
+                        ////_currentContranct.Parts[0].Pay_day = First_part_date.SelectedDate;
+                        parts[0].Price = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        break;
+                    case 1:
+                        parts[0].Pay_day = First_part_date.SelectedDate;
+                        parts[0].Price = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+
+                        parts[1].Pay_day = Second_part_date.SelectedDate;
+                        parts[1].Price = decimal.Parse(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        break;
+                    case 2:
+                        parts[0].Pay_day = First_part_date.SelectedDate;
+                        parts[0].Price = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+
+                        parts[1].Pay_day = Second_part_date.SelectedDate;
+                        parts[1].Price = decimal.Parse(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+
+                        parts[2].Pay_day = Third_part_date.SelectedDate;
+                        parts[2].Price = decimal.Parse(TBThirdpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        break;
+                    case 3:
+
+                        parts[0].Pay_day = First_part_date.SelectedDate;
+                        parts[0].Price = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+
+                        parts[1].Pay_day = Second_part_date.SelectedDate;
+                        parts[1].Price = decimal.Parse(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+
+                        parts[2].Pay_day = Third_part_date.SelectedDate;
+                        parts[2].Price = decimal.Parse(TBThirdpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+
+                        parts[3].Pay_day = Fourth_part_edit.SelectedDate;
+                        parts[3].Price = decimal.Parse(TBFourthpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        break;
+            }
+
+            CM_Entities.GetContext().SaveChanges();
+
             FrameManager.MainFrame.Navigate(new DogovoraPage());
         }
         

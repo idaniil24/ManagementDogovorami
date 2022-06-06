@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ManagementDogovorami.View.Pages;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -21,7 +22,8 @@ namespace ManagementDogovorami
     public partial class MainWindow : Window
     {
         public string login;
-        public string password;        
+        public string password;
+        public int layer = 3;
         public MainWindow()
         {
             InitializeComponent();
@@ -46,14 +48,14 @@ namespace ManagementDogovorami
                 MessageBox.Show("Введите пароль!");
                 return;
             }
-            else if (ydodbEntities1.GetContext().Manager.Where(x => x.Login == login && x.Password == password).Count() == 0)
+            else if (CM_Entities.GetContext().Manager.Where(x => x.Login == login && x.Password == password).Count() == 0)
             {
                 MessageBox.Show("Такого пользователя не существует!");
                 return;
             }
-            else
+            else if (CM_Entities.GetContext().Manager.Where(x => x.ID == 3).Count() > 0)
             {
-                manager = ydodbEntities1.GetContext().Manager.Where(x => x.Login == login && x.Password == password).First();
+                manager = CM_Entities.GetContext().Manager.Where(x => x.Login == login && x.Password == password).First();
                 ManagerSaver.Login = login;
                 ManagerSaver.First_name = manager.First_name.ToString();
                 ManagerSaver.Second_name = manager.Second_name.ToString();
@@ -61,6 +63,30 @@ namespace ManagementDogovorami
                 ManagerSaver.Phone_number = manager.Phone.ToString();
                 ManagerSaver.ID = manager.ID;
                 MainScreen mainScreen = new MainScreen();
+
+                FrameManager.MainFrame.Navigate(new LayerContractsPage());
+
+                FrameManager.MainScreen = mainScreen;
+                FrameManager.MainScreen.Show();
+                FrameManager.MainWindow.Hide();
+                
+                LoginTextBox.Text = "Логин";
+                passwordlable.Text = "Пароль";
+                PasswordTextBox.Password = null;
+            }
+            else
+            {
+                manager = CM_Entities.GetContext().Manager.Where(x => x.Login == login && x.Password == password).First();
+                ManagerSaver.Login = login;
+                ManagerSaver.First_name = manager.First_name.ToString();
+                ManagerSaver.Second_name = manager.Second_name.ToString();
+                ManagerSaver.Last_name = manager.Last_name.ToString();
+                ManagerSaver.Phone_number = manager.Phone.ToString();
+                ManagerSaver.ID = manager.ID;
+                MainScreen mainScreen = new MainScreen();
+
+                FrameManager.MainFrame.Navigate(new DogovoraPage());
+
                 FrameManager.MainScreen = mainScreen;
                 FrameManager.MainScreen.Show();
                 FrameManager.MainWindow.Hide();

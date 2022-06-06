@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using ManagementDogovorami.View.Pages;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -33,7 +34,15 @@ namespace ManagementDogovorami
 
         private void MoveToDogovoraPage(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new DogovoraPage());
+            if(ManagerSaver.ID == 3)
+            {
+                FrameManager.MainFrame.Navigate(new LayerContractsPage());
+            }
+            else
+            {
+                FrameManager.MainFrame.Navigate(new DogovoraPage());
+            }
+
         }
 
         private void MoveToClientsPage(object sender, MouseButtonEventArgs e)

@@ -23,9 +23,9 @@ namespace ManagementDogovorami
     {
         public DogovoraPage()
         {
-            var currentContracts = ydodbEntities1.GetContext().Contracts.Where(x => x.Manager_id == ManagerSaver.ID).ToList();
+            var currentContracts = CM_Entities.GetContext().Contracts.Where(x => x.Manager_id == ManagerSaver.ID).ToList();
             InitializeComponent();
-            LWContracts.ItemsSource = currentContracts;
+            LWContracts.ItemsSource = currentContracts; 
         }
 
         private void moveToAddContract(object sender, MouseButtonEventArgs e)

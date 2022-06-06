@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f617aa366d4847e08b48558f41015d9c" Name="Diagram1" ZoomLevel="107">
+        <EntityTypeShape EntityType="CM_Model.Clients" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="CM_Model.Contracts" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CM_Model.Currencies" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CM_Model.Manager" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="CM_Model.Parts" Width="1.5" PointX="5.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CM_Model.Payded" Width="1.5" PointX="5.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CM_Model.Statuses" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CM_Model.sysdiagrams" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CM_Model.Types" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <AssociationConnector Association="CM_Model.FK_Contracts_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="CM_Model.FK_Contracts_currencies" ManuallyRouted="false" />
+        <AssociationConnector Association="CM_Model.FK_Contracts_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="CM_Model.FK_Contracts_Statuses" ManuallyRouted="false" />
+        <AssociationConnector Association="CM_Model.FK_Contracts_Types" ManuallyRouted="false" />
+        <AssociationConnector Association="CM_Model.FK_Parts_Contracts" ManuallyRouted="false" />
+        <AssociationConnector Association="CM_Model.FK_Payded_Contracts" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

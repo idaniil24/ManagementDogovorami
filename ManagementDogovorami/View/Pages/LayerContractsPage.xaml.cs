@@ -13,18 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ManagementDogovorami
+namespace ManagementDogovorami.View.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для ClientsPage.xaml
+    /// Логика взаимодействия для LayerContractsPage.xaml
     /// </summary>
-    public partial class ClientsPage : Page
+    public partial class LayerContractsPage : Page
     {
-        public ClientsPage()
+        public LayerContractsPage()
         {
-            var currentClients = CM_Entities.GetContext().Clients.ToList();
+            var currentContracts = CM_Entities.GetContext().Contracts.Where(x => x.Stasus_id == 1).ToList();
             InitializeComponent();
-            LWClients.ItemsSource = currentClients;
+            LWContractsLayer.ItemsSource = currentContracts;
         }
     }
 }

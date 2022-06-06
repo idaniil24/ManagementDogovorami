@@ -68,35 +68,59 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Clients.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CM_Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CM_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CM_Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CM_Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CM_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Contracts.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Currencies.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Manager.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Parts.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Payded.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Statuses.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Types.cs">
+      <DependentUpon>CM_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\AddContractPage.xaml.cs">
       <DependentUpon>AddContractPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Clients.cs">
-      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="View\Pages\ClientsPage.xaml.cs">
       <DependentUpon>ClientsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Contracts.cs">
-      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContractsManagementModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContractsManagementModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContractsManagementModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ContractsManagementModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContractsManagementModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Manager.cs">
-      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManagerSaver.cs" />
     <Compile Include="View\Pages\ContractPage.xaml.cs">
@@ -105,20 +129,11 @@
     <Compile Include="View\Pages\EditContractPage.xaml.cs">
       <DependentUpon>EditContractPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\LayerContractsPage.xaml.cs">
+      <DependentUpon>LayerContractsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Types.cs">
-      <DependentUpon>ContractsManagementModel.tt</DependentUpon>
     </Compile>
     <Page Include="View\Pages\AddContractPage.xaml">
       <SubType>Designer</SubType>
@@ -137,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\EditContractPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\LayerContractsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -194,12 +213,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ContractsManagementModel.edmx">
+    <EntityDeploy Include="CM_Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ContractsManagementModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>CM_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ContractsManagementModel.edmx.diagram">
-      <DependentUpon>ContractsManagementModel.edmx</DependentUpon>
+    <None Include="CM_Model.edmx.diagram">
+      <DependentUpon>CM_Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -217,15 +236,15 @@
     <Resource Include="res\logo_shorcut.png" />
     <Resource Include="res\IconApp.png" />
     <Resource Include="res\3030708_group_groups_members_team_icon 1.png" />
-    <Content Include="ContractsManagementModel.Context.tt">
+    <Content Include="CM_Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ContractsManagementModel.edmx</DependentUpon>
-      <LastGenOutput>ContractsManagementModel.Context.cs</LastGenOutput>
+      <DependentUpon>CM_Model.edmx</DependentUpon>
+      <LastGenOutput>CM_Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ContractsManagementModel.tt">
+    <Content Include="CM_Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ContractsManagementModel.edmx</DependentUpon>
-      <LastGenOutput>ContractsManagementModel.cs</LastGenOutput>
+      <DependentUpon>CM_Model.edmx</DependentUpon>
+      <LastGenOutput>CM_Model.cs</LastGenOutput>
     </Content>
     <Content Include="res\352468_arrow_right_icon 1.svg" />
     <Resource Include="res\4781858_arrow_arrows_back_direction_left_icon.png" />

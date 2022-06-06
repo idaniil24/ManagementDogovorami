@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище ydodbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище CM_Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ID" />
@@ -23,21 +23,21 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Price" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Avance" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="First_part" Type="nvarchar" MaxLength="50" />
           <Property Name="Parts_count" Type="int" />
-          <Property Name="Second_part" Type="nvarchar" MaxLength="50" />
-          <Property Name="Third_part" Type="nvarchar" MaxLength="50" />
-          <Property Name="Fourth_part" Type="nvarchar" MaxLength="50" />
+          <Property Name="Avance" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Avance_date" Type="date" Nullable="false" />
-          <Property Name="First_part_date" Type="date" />
-          <Property Name="Second_part_date" Type="date" />
-          <Property Name="Third_part_date" Type="date" />
-          <Property Name="Fourth_part_date" Type="date" />
-          <Property Name="Client_id" Type="int" Nullable="false" />
-          <Property Name="Manager_id" Type="int" Nullable="false" />
-          <Property Name="Type_id" Type="int" Nullable="false" />
-          <Property Name="Payded" Type="nvarchar" MaxLength="50" />
+          <Property Name="Client_id" Type="int" />
+          <Property Name="Manager_id" Type="int" />
+          <Property Name="Type_id" Type="int" />
+          <Property Name="Stasus_id" Type="int" />
+          <Property Name="Currency_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Currencies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Manager">
           <Key>
@@ -51,6 +51,30 @@
           <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Image" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Parts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="Pay_day" Type="date" />
+          <Property Name="Contract_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Payded">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Sum" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="Contract_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -70,7 +94,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Contracts_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
           <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
@@ -81,8 +105,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Contracts_currencies">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="0..1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="Currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contracts_Manager">
-          <End Role="Manager" Type="Self.Manager" Multiplicity="1" />
+          <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
           <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Manager">
@@ -93,8 +129,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Contracts_Statuses">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="Stasus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contracts_Types">
-          <End Role="Types" Type="Self.Types" Multiplicity="1" />
+          <End Role="Types" Type="Self.Types" Multiplicity="0..1" />
           <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Types">
@@ -102,6 +150,30 @@
             </Principal>
             <Dependent Role="Contracts">
               <PropertyRef Name="Type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parts_Contracts">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="0..1" />
+          <End Role="Parts" Type="Self.Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Parts">
+              <PropertyRef Name="Contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payded_Contracts">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="Payded" Type="Self.Payded" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payded">
+              <PropertyRef Name="Contract_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -136,29 +208,49 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="Хранилище ydodbModelContainer">
+        <EntityContainer Name="Хранилище CM_ModelContainer">
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parts" EntityType="Self.Parts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payded" EntityType="Self.Payded" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Contracts_Clients" Association="Self.FK_Contracts_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Contracts" EntitySet="Contracts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Contracts_currencies" Association="Self.FK_Contracts_currencies">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Contracts_Manager" Association="Self.FK_Contracts_Manager">
             <End Role="Manager" EntitySet="Manager" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_Statuses" Association="Self.FK_Contracts_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
             <End Role="Contracts" EntitySet="Contracts" />
           </AssociationSet>
           <AssociationSet Name="FK_Contracts_Types" Association="Self.FK_Contracts_Types">
             <End Role="Types" EntitySet="Types" />
             <End Role="Contracts" EntitySet="Contracts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Parts_Contracts" Association="Self.FK_Parts_Contracts">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Parts" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payded_Contracts" Association="Self.FK_Payded_Contracts">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Payded" EntitySet="Payded" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ydodbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="CM_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ID" />
@@ -177,25 +269,30 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Price" Type="String" Nullable="false" />
-          <Property Name="Avance" Type="String" Nullable="false" />
-          <Property Name="First_part" Type="String" />
-          <Property Name="Second_part" Type="String" />
-          <Property Name="Third_part" Type="String" />
-          <Property Name="Fourth_part" Type="String" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Avance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Avance_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="First_part_date" Type="DateTime" Precision="0" />
-          <Property Name="Second_part_date" Type="DateTime" Precision="0" />
-          <Property Name="Fourth_part_date" Type="DateTime" Precision="0" />
-          <Property Name="Client_id" Type="Int32" Nullable="false" />
-          <Property Name="Manager_id" Type="Int32" Nullable="false" />
-          <Property Name="Type_id" Type="Int32" Nullable="false" />
+          <Property Name="Client_id" Type="Int32" />
+          <Property Name="Manager_id" Type="Int32" />
+          <Property Name="Type_id" Type="Int32" />
+          <Property Name="Stasus_id" Type="Int32" />
+          <Property Name="Currency_id" Type="Int32" />
           <NavigationProperty Name="Clients" Relationship="Self.FK_Contracts_Clients" FromRole="Contracts" ToRole="Clients" />
+          <NavigationProperty Name="Currencies" Relationship="Self.FK_Contracts_currencies" FromRole="Contracts" ToRole="Currencies" />
           <NavigationProperty Name="Manager" Relationship="Self.FK_Contracts_Manager" FromRole="Contracts" ToRole="Manager" />
+          <NavigationProperty Name="Statuses" Relationship="Self.FK_Contracts_Statuses" FromRole="Contracts" ToRole="Statuses" />
           <NavigationProperty Name="Types" Relationship="Self.FK_Contracts_Types" FromRole="Contracts" ToRole="Types" />
-          <Property Name="Payded" Type="String" />
+          <NavigationProperty Name="Parts" Relationship="Self.FK_Parts_Contracts" FromRole="Contracts" ToRole="Parts" />
+          <NavigationProperty Name="Payded" Relationship="Self.FK_Payded_Contracts" FromRole="Contracts" ToRole="Payded" />
           <Property Name="Parts_count" Type="Int32" />
-          <Property Name="Third_part_date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Currencies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_currencies" FromRole="Currencies" ToRole="Contracts" />
         </EntityType>
         <EntityType Name="Manager">
           <Key>
@@ -210,6 +307,33 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Manager" FromRole="Manager" ToRole="Contracts" />
+        </EntityType>
+        <EntityType Name="Parts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="Pay_day" Type="DateTime" Precision="0" />
+          <Property Name="Contract_id" Type="Int32" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Parts_Contracts" FromRole="Parts" ToRole="Contracts" />
+        </EntityType>
+        <EntityType Name="Payded">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Sum" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="Contract_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Payded_Contracts" FromRole="Payded" ToRole="Contracts" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Statuses" FromRole="Statuses" ToRole="Contracts" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -230,7 +354,7 @@
           <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Types" FromRole="Types" ToRole="Contracts" />
         </EntityType>
         <Association Name="FK_Contracts_Clients">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
           <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Clients">
@@ -241,8 +365,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Contracts_currencies">
+          <End Role="Currencies" Type="Self.Currencies" Multiplicity="0..1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currencies">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="Currency_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contracts_Manager">
-          <End Role="Manager" Type="Self.Manager" Multiplicity="1" />
+          <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
           <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Manager">
@@ -253,8 +389,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Contracts_Statuses">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="0..1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="Stasus_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Contracts_Types">
-          <End Role="Types" Type="Self.Types" Multiplicity="1" />
+          <End Role="Types" Type="Self.Types" Multiplicity="0..1" />
           <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Types">
@@ -265,23 +413,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ydodbEntities1" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Parts_Contracts">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="0..1" />
+          <End Role="Parts" Type="Self.Parts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Parts">
+              <PropertyRef Name="Contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payded_Contracts">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="Payded" Type="Self.Payded" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Payded">
+              <PropertyRef Name="Contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CM_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clients" EntityType="Self.Clients" />
           <EntitySet Name="Contracts" EntityType="Self.Contracts" />
+          <EntitySet Name="Currencies" EntityType="Self.Currencies" />
           <EntitySet Name="Manager" EntityType="Self.Manager" />
+          <EntitySet Name="Parts" EntityType="Self.Parts" />
+          <EntitySet Name="Payded" EntityType="Self.Payded" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Types" EntityType="Self.Types" />
           <AssociationSet Name="FK_Contracts_Clients" Association="Self.FK_Contracts_Clients">
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Contracts" EntitySet="Contracts" />
           </AssociationSet>
+          <AssociationSet Name="FK_Contracts_currencies" Association="Self.FK_Contracts_currencies">
+            <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Contracts_Manager" Association="Self.FK_Contracts_Manager">
             <End Role="Manager" EntitySet="Manager" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contracts_Statuses" Association="Self.FK_Contracts_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
             <End Role="Contracts" EntitySet="Contracts" />
           </AssociationSet>
           <AssociationSet Name="FK_Contracts_Types" Association="Self.FK_Contracts_Types">
             <End Role="Types" EntitySet="Types" />
             <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parts_Contracts" Association="Self.FK_Parts_Contracts">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Parts" EntitySet="Parts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payded_Contracts" Association="Self.FK_Payded_Contracts">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Payded" EntitySet="Payded" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -299,11 +491,11 @@
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ydodbModel.sp_helpdiagramdefinition_Result)">
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(CM_Model.sp_helpdiagramdefinition_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ydodbModel.sp_helpdiagrams_Result)">
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(CM_Model.sp_helpdiagrams_Result)">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -330,9 +522,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ydodbModelContainer" CdmEntityContainer="ydodbEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CM_ModelContainer" CdmEntityContainer="CM_Entities">
           <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="ydodbModel.Clients">
+            <EntityTypeMapping TypeName="CM_Model.Clients">
               <MappingFragment StoreEntitySet="Clients">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="First_name" ColumnName="First_name" />
@@ -345,30 +537,31 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Contracts">
-            <EntityTypeMapping TypeName="ydodbModel.Contracts">
+            <EntityTypeMapping TypeName="CM_Model.Contracts">
               <MappingFragment StoreEntitySet="Contracts">
-                <ScalarProperty Name="Third_part_date" ColumnName="Third_part_date" />
                 <ScalarProperty Name="Parts_count" ColumnName="Parts_count" />
-                <ScalarProperty Name="Payded" ColumnName="Payded" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Avance" ColumnName="Avance" />
-                <ScalarProperty Name="First_part" ColumnName="First_part" />
-                <ScalarProperty Name="Second_part" ColumnName="Second_part" />
-                <ScalarProperty Name="Third_part" ColumnName="Third_part" />
-                <ScalarProperty Name="Fourth_part" ColumnName="Fourth_part" />
                 <ScalarProperty Name="Avance_date" ColumnName="Avance_date" />
-                <ScalarProperty Name="First_part_date" ColumnName="First_part_date" />
-                <ScalarProperty Name="Second_part_date" ColumnName="Second_part_date" />
-                <ScalarProperty Name="Fourth_part_date" ColumnName="Fourth_part_date" />
                 <ScalarProperty Name="Client_id" ColumnName="Client_id" />
                 <ScalarProperty Name="Manager_id" ColumnName="Manager_id" />
                 <ScalarProperty Name="Type_id" ColumnName="Type_id" />
+                <ScalarProperty Name="Stasus_id" ColumnName="Stasus_id" />
+                <ScalarProperty Name="Currency_id" ColumnName="Currency_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="CM_Model.Currencies">
+              <MappingFragment StoreEntitySet="Currencies">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Manager">
-            <EntityTypeMapping TypeName="ydodbModel.Manager">
+            <EntityTypeMapping TypeName="CM_Model.Manager">
               <MappingFragment StoreEntitySet="Manager">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="First_name" ColumnName="First_name" />
@@ -381,8 +574,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Parts">
+            <EntityTypeMapping TypeName="CM_Model.Parts">
+              <MappingFragment StoreEntitySet="Parts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Pay_day" ColumnName="Pay_day" />
+                <ScalarProperty Name="Contract_id" ColumnName="Contract_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payded">
+            <EntityTypeMapping TypeName="CM_Model.Payded">
+              <MappingFragment StoreEntitySet="Payded">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Contract_id" ColumnName="Contract_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="CM_Model.Statuses">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ydodbModel.sysdiagrams">
+            <EntityTypeMapping TypeName="CM_Model.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -393,27 +613,27 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Types">
-            <EntityTypeMapping TypeName="ydodbModel.Types">
+            <EntityTypeMapping TypeName="CM_Model.Types">
               <MappingFragment StoreEntitySet="Types">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище ydodbModel.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище ydodbModel.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище ydodbModel.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище ydodbModel.sp_helpdiagramdefinition">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище CM_Model.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище CM_Model.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище CM_Model.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище CM_Model.sp_helpdiagramdefinition">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ydodbModel.sp_helpdiagramdefinition_Result">
+              <ComplexTypeMapping TypeName="CM_Model.sp_helpdiagramdefinition_Result">
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище ydodbModel.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище CM_Model.sp_helpdiagrams">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ydodbModel.sp_helpdiagrams_Result">
+              <ComplexTypeMapping TypeName="CM_Model.sp_helpdiagrams_Result">
                 <ScalarProperty Name="Database" ColumnName="Database" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -422,8 +642,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище ydodbModel.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище ydodbModel.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище CM_Model.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище CM_Model.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

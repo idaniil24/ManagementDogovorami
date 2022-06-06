@@ -14,26 +14,32 @@ namespace ManagementDogovorami
     
     public partial class Contracts
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Contracts()
+        {
+            this.Parts = new HashSet<Parts>();
+            this.Payded = new HashSet<Payded>();
+        }
+    
         public int ID { get; set; }
         public string Price { get; set; }
         public string Avance { get; set; }
-        public string First_part { get; set; }
-        public string Second_part { get; set; }
-        public string Third_part { get; set; }
-        public string Fourth_part { get; set; }
         public System.DateTime Avance_date { get; set; }
-        public Nullable<System.DateTime> First_part_date { get; set; }
-        public Nullable<System.DateTime> Second_part_date { get; set; }
-        public Nullable<System.DateTime> Fourth_part_date { get; set; }
-        public int Client_id { get; set; }
-        public int Manager_id { get; set; }
-        public int Type_id { get; set; }
-        public string Payded { get; set; }
+        public Nullable<int> Client_id { get; set; }
+        public Nullable<int> Manager_id { get; set; }
+        public Nullable<int> Type_id { get; set; }
+        public Nullable<int> Stasus_id { get; set; }
+        public Nullable<int> Currency_id { get; set; }
         public Nullable<int> Parts_count { get; set; }
-        public Nullable<System.DateTime> Third_part_date { get; set; }
     
         public virtual Clients Clients { get; set; }
+        public virtual Currencies Currencies { get; set; }
         public virtual Manager Manager { get; set; }
+        public virtual Statuses Statuses { get; set; }
         public virtual Types Types { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Parts> Parts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Payded> Payded { get; set; }
     }
 }
