@@ -69,6 +69,8 @@
                                HorizontalAlignment="Left" Margin="20,15,0,0"/>
                     <TextBox x:Name="TBPriceEdit" Width="300" Height="40" 
                              FontSize="23"
+                             TextChanged="partssummary"
+                             PreviewTextInput="charcheck"
                              Text="{Binding Price}"
                              Margin="20,0,0,0" 
                              VerticalAlignment="Bottom"/>
@@ -91,6 +93,8 @@
                                HorizontalAlignment="Left" Margin="20,10,0,0"/>
                     <TextBox x:Name="TBAvanceEdit"
                              FontSize="23"
+                             TextChanged="partssummary"
+                             PreviewTextInput="charcheck"
                              Text="{Binding Avance}"
                              Width="300" 
                              Height="40" Margin="81,0,0,0" VerticalAlignment="Bottom"/>
@@ -129,6 +133,8 @@
                     <TextBlock Text="Сумма первой части:" FontSize="23" 
                                HorizontalAlignment="Left" Margin="20,10,0,0"/>
                     <TextBox x:Name="TBFirstpart" Width="300"
+                             PreviewTextInput="charcheck"
+                             TextChanged="partssummary"
                              Text="{Binding First_part}"
                              FontSize="23"                             
                              Height="40" Margin="7,0,0,0" VerticalAlignment="Bottom"/>
@@ -147,6 +153,8 @@
                     <TextBlock Text="Сумма второй части:" FontSize="23" 
                                HorizontalAlignment="Left" Margin="20,10,0,0"/>
                     <TextBox x:Name="TBSecondpart"
+                             TextChanged="partssummary"
+                             PreviewTextInput="charcheck"
                              Text="{Binding Second_part}"
                              FontSize="23"
                              Width="300" Height="40" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
@@ -164,6 +172,8 @@
                     <TextBlock Text="Сумма третьей части:" FontSize="23" 
                                HorizontalAlignment="Left" Margin="20,10,0,0"/>
                     <TextBox x:Name="TBThirdpart" 
+                             TextChanged="partssummary"
+                             PreviewTextInput="charcheck"
                              Text="{Binding Third_part}"
                              FontSize="23"
                              Width="300" Height="40" Margin="4,0,0,0" VerticalAlignment="Bottom"/>
@@ -181,6 +191,8 @@
                     <TextBlock Text="Сумма четвертой части:" FontSize="23" 
                                HorizontalAlignment="Left" Margin="20,10,0,0"/>
                     <TextBox x:Name="TBFourthpart" 
+                             TextChanged="partssummary"
+                             PreviewTextInput="charcheck"
                              Text="{Binding Fourth_part}"
                              FontSize="23"
                              Width="270" Height="40" Margin="7,0,0,0" VerticalAlignment="Bottom"/>

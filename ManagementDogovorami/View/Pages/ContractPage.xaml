@@ -75,7 +75,11 @@
                             <TextBlock Text="{Binding Avance_date, StringFormat={}Оплатить до: {0}}" FontSize="23"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Parts_count, StringFormat={}Кол-во частей оплаты: {0}}" FontSize="23" Width="570"/>
+                            <TextBlock Text="Кол-во частей оплаты:" FontSize="23" />
+                            <TextBlock Text="{Binding Parts_count}" 
+                                       x:Name="PartsCount"
+                                       FontSize="23" 
+                                       Width="570"/>
                         </StackPanel>
                             
                         <StackPanel Orientation="Horizontal">
@@ -86,7 +90,7 @@
                             <TextBlock x:Name = "first_part_date" Text="{Binding First_part_date, StringFormat={}Оплатить до: {0}}" FontSize="23"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" x:Name="seconndvisibility">
                             <TextBlock Text="Сумма второй части:" FontSize="23"/>
                             <TextBlock  Text="{Binding Second_part, StringFormat={}Сумма второй части: {0}}" 
                                         x:Name="secondpart"
@@ -98,7 +102,7 @@
                         </StackPanel>
 
 
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" x:Name="thirdvisibility">
                             <TextBlock Text="Сумма третьей части:" FontSize="23"/>
                             <TextBlock Text="{Binding Third_part, StringFormat={}Сумма третьей части: {0}}" 
                                        x:Name="thirdpart"
@@ -108,8 +112,8 @@
                                         x:Name="thirdpartdate"
                                         FontSize="23"/>
                         </StackPanel>
-  
-                        <StackPanel Orientation="Horizontal">
+
+                        <StackPanel Orientation="Horizontal" x:Name="fourthvisibility">
                             <TextBlock Text="Сумма четвертой части:" FontSize="23"/>
                             <TextBlock Text="{Binding Fourth_part, StringFormat={}Сумма четвертой части: {0}}"
                                        x:Name="fourthpart"

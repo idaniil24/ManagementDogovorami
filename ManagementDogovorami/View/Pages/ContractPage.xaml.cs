@@ -22,12 +22,14 @@ namespace ManagementDogovorami.View.Pages
     public partial class ContractPage : Page
     {
         Contracts contract;
+        int pCounts;
         private Parts[] parts;
         public ContractPage(Contracts contract)
         {
             InitializeComponent();
             DataContext = contract;
             this.contract = contract;
+            
 
             DataContext = contract;
             parts = contract.Parts.ToArray();
@@ -69,6 +71,35 @@ namespace ManagementDogovorami.View.Pages
                     fourthpart.Text = parts[3].Price.ToString();
                     break;
             }
+
+            if (parts.Count() == 1)
+            {
+                seconndvisibility.Visibility = Visibility.Hidden;
+                thirdvisibility.Visibility = Visibility.Hidden;
+                fourthvisibility.Visibility = Visibility.Hidden;
+            }
+
+            if (parts.Count() == 2)
+            {
+                seconndvisibility.Visibility = Visibility.Visible;
+                thirdvisibility.Visibility = Visibility.Hidden;
+                fourthvisibility.Visibility = Visibility.Hidden;
+            }
+
+            if (parts.Count() == 3)
+            {
+                fourthvisibility.Visibility = Visibility.Hidden;
+                thirdvisibility.Visibility = Visibility.Visible;
+                seconndvisibility.Visibility = Visibility.Visible;
+            }
+
+            if (parts.Count() == 4)
+            {
+                fourthvisibility.Visibility = Visibility.Visible;
+                thirdvisibility.Visibility = Visibility.Visible;
+                seconndvisibility.Visibility = Visibility.Visible;
+            }
+            
         }
 
         private void MoveToDogovoraPage(object sender, RoutedEventArgs e)

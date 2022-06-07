@@ -53,27 +53,6 @@ namespace ManagementDogovorami
                 MessageBox.Show("Такого пользователя не существует!");
                 return;
             }
-            else if (CM_Entities.GetContext().Manager.Where(x => x.ID == 3).Count() > 0)
-            {
-                manager = CM_Entities.GetContext().Manager.Where(x => x.Login == login && x.Password == password).First();
-                ManagerSaver.Login = login;
-                ManagerSaver.First_name = manager.First_name.ToString();
-                ManagerSaver.Second_name = manager.Second_name.ToString();
-                ManagerSaver.Last_name = manager.Last_name.ToString();
-                ManagerSaver.Phone_number = manager.Phone.ToString();
-                ManagerSaver.ID = manager.ID;
-                MainScreen mainScreen = new MainScreen();
-
-                FrameManager.MainFrame.Navigate(new LayerContractsPage());
-
-                FrameManager.MainScreen = mainScreen;
-                FrameManager.MainScreen.Show();
-                FrameManager.MainWindow.Hide();
-                
-                LoginTextBox.Text = "Логин";
-                passwordlable.Text = "Пароль";
-                PasswordTextBox.Password = null;
-            }
             else
             {
                 manager = CM_Entities.GetContext().Manager.Where(x => x.Login == login && x.Password == password).First();
@@ -84,12 +63,23 @@ namespace ManagementDogovorami
                 ManagerSaver.Phone_number = manager.Phone.ToString();
                 ManagerSaver.ID = manager.ID;
                 MainScreen mainScreen = new MainScreen();
+                if(ManagerSaver.ID == 3)
+                {
+                    FrameManager.MainFrame.Navigate(new LayerContractsPage());
 
-                FrameManager.MainFrame.Navigate(new DogovoraPage());
+                    FrameManager.MainScreen = mainScreen;
+                    FrameManager.MainScreen.Show();
+                    FrameManager.MainWindow.Hide();
+                }
+                else
+                {
+                    FrameManager.MainFrame.Navigate(new DogovoraPage());
 
-                FrameManager.MainScreen = mainScreen;
-                FrameManager.MainScreen.Show();
-                FrameManager.MainWindow.Hide();
+                    FrameManager.MainScreen = mainScreen;
+                    FrameManager.MainScreen.Show();
+                    FrameManager.MainWindow.Hide();
+                }
+              
                 LoginTextBox.Text = "Логин";
                 passwordlable.Text = "Пароль";
                 PasswordTextBox.Password = null;
