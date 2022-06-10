@@ -20,12 +20,14 @@ namespace ManagementDogovorami
     /// Логика взаимодействия для DogovoraPage.xaml
     /// </summary>
     public partial class DogovoraPage : Page
+     
     {
         public DogovoraPage()
         {
             var currentContracts = CM_Entities.GetContext().Contracts.Where(x => x.Manager_id == ManagerSaver.ID).ToList();
             InitializeComponent();
-            LWContracts.ItemsSource = currentContracts; 
+            LWContracts.ItemsSource = currentContracts;
+
         }
 
         private void moveToAddContract(object sender, MouseButtonEventArgs e)
@@ -36,6 +38,33 @@ namespace ManagementDogovorami
         private void MoveToShowContract(object sender, MouseButtonEventArgs e)
         {
             FrameManager.MainFrame.Navigate(new ContractPage((sender as Border).DataContext as Contracts));
+        }
+
+        private void updateContracts()
+        {
+            var currentContracts = CM_Entities.GetContext().Contracts.Where(x => x.Manager_id == ManagerSaver.ID).ToList();
+
+            int search = 0;
+            if(CustomTextBox.Text != "")
+            {
+                search = Convert.ToInt32(CustomTextBox.Text);
+            }
+
+            LWContracts.ItemsSource = currentContracts.Where(x => x.ID == search && x.Manager_id == ManagerSaver.ID).ToList(); 
+            if(LWContracts.Items.Count == 0)
+            {
+                LWContracts.ItemsSource = currentContracts;
+            }
+        }
+
+        private void textupdate(object sender, TextChangedEventArgs e)
+        {
+            updateContracts();
+        }
+
+        private void onlycifri(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = "0123456789 ,".IndexOf(e.Text) < 0;
         }
     }
 }

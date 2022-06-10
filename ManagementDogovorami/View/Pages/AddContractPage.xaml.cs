@@ -45,6 +45,10 @@ namespace ManagementDogovorami
 
             TBManager.SelectedIndex = 0;
 
+            TBStatus.ItemsSource = CM_Entities.GetContext().Statuses.ToList();
+
+            TBStatus.SelectedIndex = 0;
+
             ComboClients.SelectedIndex = 0;
 
             ComboCurrencies.SelectedIndex = 0;
@@ -243,6 +247,7 @@ namespace ManagementDogovorami
             else
             {
                 int index = ComboParts.SelectedIndex;
+                TBStatus.SelectedIndex = 0;
                 TBManager.SelectedIndex = 0;
                 _currentContranct.Avance_date = (DateTime)AvanceDate.SelectedDate;
                 Contracts currentContract = CM_Entities.GetContext().Contracts.Add(_currentContranct);

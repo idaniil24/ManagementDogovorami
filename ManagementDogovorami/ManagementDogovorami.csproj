@@ -233,6 +233,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="res\menedzher.gif" />
     <Resource Include="res\logo_shorcut.png" />
     <Resource Include="res\IconApp.png" />
     <Resource Include="res\3030708_group_groups_members_team_icon 1.png" />
@@ -255,6 +256,7 @@
     <Resource Include="res\3643747_friend_group_people_peoples_team_icon.png" />
     <Resource Include="res\4115235_exit_logout_sign out_icon 1.png" />
     <Resource Include="res\logo_app.png" />
+    <Resource Include="res\alexeyclient.jpg" />
     <Content Include="res\dogovorsvg.svg" />
     <Resource Include="res\Union.png" />
   </ItemGroup>

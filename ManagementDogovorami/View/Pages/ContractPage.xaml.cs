@@ -23,16 +23,51 @@ namespace ManagementDogovorami.View.Pages
     {
         Contracts contract;
         int pCounts;
+        double sum;
+        double oplacheno;
+        private Payded[] paydeds;
         private Parts[] parts;
+        double procent = 2.4;
+
         public ContractPage(Contracts contract)
         {
             InitializeComponent();
             DataContext = contract;
+            AvanceDate.Text = contract.Avance_date.ToString();
             this.contract = contract;
-            
+
+            paydeds = contract.Payded.ToArray();
+
+            for (int i = 0; i < paydeds.Length; i++)
+            {
+                double s = (double)paydeds[i].Sum;
+                oplacheno = s + oplacheno;
+            }
+            TBPayded.Text = oplacheno.ToString();
+
+
+            //DateTime dateTime = new DateTime();
+            //dateTime = Convert.ToDateTime(first_part_date);
+
+            //if(DateTime.Now>dateTime)
+            //{
+            //    sum = sum * 2;
+            //}
+
+
+            //MessageBox.Show(sum.ToString());
+
+            sum = Convert.ToDouble(contract.Price);
 
             DataContext = contract;
             parts = contract.Parts.ToArray();
+
+            if (DateTime.Today > Convert.ToDateTime(parts[0].Pay_day) && oplacheno < Convert.ToDouble(parts[0].Price))
+            {
+                sum = sum * 1.2;
+            }
+            MessageBox.Show(sum.ToString());
+
             switch (parts.Count())
             {
                 case 1:
@@ -102,6 +137,8 @@ namespace ManagementDogovorami.View.Pages
             
         }
 
+        
+
         private void MoveToDogovoraPage(object sender, RoutedEventArgs e)
         {
             FrameManager.MainFrame.Navigate(new DogovoraPage());
@@ -109,7 +146,11 @@ namespace ManagementDogovorami.View.Pages
 
         private void MoveToEditContractPage(object sender, MouseButtonEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new EditContractPage((sender as Border).DataContext as Contracts));
+            if (contract.Stasus_id == 1)
+            {
+                FrameManager.MainFrame.Navigate(new EditContractPage((sender as Border).DataContext as Contracts));
+            }
+            else MessageBox.Show("Данный договор уже утвержден!");
         }
     }
 }

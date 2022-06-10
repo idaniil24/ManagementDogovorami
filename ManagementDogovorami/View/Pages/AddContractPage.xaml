@@ -202,6 +202,8 @@
                 </StackPanel>
 
 
+
+
                 <Border 
                     MouseDown="CreateContract_Click"
                     HorizontalAlignment="Center"
@@ -215,13 +217,20 @@
                            FontSize="20"/>
                 </Border>
 
+                <ComboBox x:Name="TBStatus"
+                         SelectedItem="{Binding Statuses}"
+                         SelectedIndex="0"
+                         Width="200"
+                         Visibility="Hidden"
+                         Height="50" />
                 <ComboBox x:Name="TBManager"
                          SelectedItem="{Binding Manager}"
                          SelectedIndex="0"
                          Width="200"
                          Visibility="Hidden"
                          Height="50" />
-
+                
+               
             </StackPanel>
         </Grid>
     </Grid>

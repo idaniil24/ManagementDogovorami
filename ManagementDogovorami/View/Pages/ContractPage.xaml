@@ -42,6 +42,7 @@
                                     Width="425"
                                     Margin="20,0,0,0" Height="130" VerticalAlignment="Top">
                             <TextBlock Text="{Binding ID, StringFormat={}Номер договора: {0}}" FontSize="23"/>
+
                             <TextBlock Text="{Binding Types.Name}" FontSize="23"/>
                             <StackPanel Width="200" Height="2" 
                                         HorizontalAlignment="Left"
@@ -63,69 +64,129 @@
                                 CornerRadius="15"
                                 Height="70"
                                 Background="#57AACD">
-                            <TextBlock Text="Отчет о задолжности" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="White"/>
+                            <TextBlock Text="Отчет о задолженности" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="White"/>
                         </Border>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="0,80,0,0">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Price, StringFormat={}Сумма по договору:{0}}" FontSize="23"/>
+                            <TextBlock FontSize="23">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}Сумма по договору: {0} {1}">
+                                        <Binding Path="Price"/>
+                                        <Binding Path="Currencies.Name"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
                         </StackPanel>
+                        
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Avance, StringFormat={}Сумма аванса: {0}}" FontSize="23" Width="540"/>
-                            <TextBlock Text="{Binding Avance_date, StringFormat={}Оплатить до: {0}}" FontSize="23"/>
+                            <TextBlock  FontSize="23" Width="500">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}Сумма аванса: {0} {1}">
+                                        <Binding Path="Avance"/>
+                                        <Binding Path="Currencies.Name"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                            <TextBlock Text="Оплатить до:" FontSize="23"/>
+                            <TextBlock Text="{Binding Avance_date, StringFormat={}Оплатить до: {0}}" 
+                                       x:Name="AvanceDate"
+                                       Margin="5 0 0 0"
+                                       FontSize="23"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Кол-во частей оплаты:" FontSize="23" />
-                            <TextBlock Text="{Binding Parts_count}" 
+                            <TextBlock Text="{Binding Parts_count}"
+                                       Margin="5 0 0 0"
                                        x:Name="PartsCount"
                                        FontSize="23" 
                                        Width="570"/>
                         </StackPanel>
                             
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Сумма первой части:" FontSize="23"/>
-                            <TextBlock x:Name = "first_part" Text="{Binding First_part, StringFormat={}Сумма первой части: {0}}"
-                                       FontSize="23" Width="298"/>
+                            <StackPanel Orientation="Horizontal" Width="500">
+                                <TextBlock Text="Сумма первой части:" FontSize="23"/>
+                                <TextBlock x:Name = "first_part"
+                                           Margin="5 0 0 0"
+                                           Text="{Binding First_part, StringFormat={}Сумма первой части: {0}}"
+                                       FontSize="23"/>
+                                <TextBlock Text="{Binding Currencies.Name}" FontSize="23" Margin="5 0 0 0"/>
+                            </StackPanel>
+                          
                             <TextBlock Text="Оплатить до:" FontSize="23"/>
-                            <TextBlock x:Name = "first_part_date" Text="{Binding First_part_date, StringFormat={}Оплатить до: {0}}" FontSize="23"/>
+                            <TextBlock x:Name = "first_part_date" 
+                                       Margin="5 0 0 0"
+                                       Text="{Binding First_part_date, StringFormat={}Оплатить до: {0}}" FontSize="23"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" x:Name="seconndvisibility">
-                            <TextBlock Text="Сумма второй части:" FontSize="23"/>
-                            <TextBlock  Text="{Binding Second_part, StringFormat={}Сумма второй части: {0}}" 
+                            <StackPanel Orientation="Horizontal" Width="500">
+                                <TextBlock Text="Сумма второй части:" FontSize="23"/>
+                                <TextBlock  Text="{Binding Second_part, StringFormat={}Сумма второй части: {0}}" 
+                                            Margin="5 0 0 0"
                                         x:Name="secondpart"
-                                        FontSize="23" Width="300"/>
+                                        FontSize="23"/>
+                                <TextBlock Text="{Binding Currencies.Name}" FontSize="23" Margin="5 0 0 0"/>
+                            </StackPanel>
+                           
                             <TextBlock Text="Оплатить до:" FontSize="23"/>
                             <TextBlock  Text="{Binding Second_part_date, StringFormat={}Оплатить до: {0}}" 
                                         x:Name="secondpartdate"
+                                        Margin="5 0 0 0"
                                         FontSize="23"/>
                         </StackPanel>
 
 
                         <StackPanel Orientation="Horizontal" x:Name="thirdvisibility">
-                            <TextBlock Text="Сумма третьей части:" FontSize="23"/>
-                            <TextBlock Text="{Binding Third_part, StringFormat={}Сумма третьей части: {0}}" 
+                            <StackPanel Orientation="Horizontal" Width="500">
+                                <TextBlock Text="Сумма третьей части:" FontSize="23"/>
+                                <TextBlock Text="{Binding Third_part, StringFormat={}Сумма третьей части: {0}}" 
+                                           Margin="5 0 0 0"
                                        x:Name="thirdpart"
-                                       FontSize="23" Width="293"/>
+                                       FontSize="23"/>
+                                <TextBlock Text="{Binding Currencies.Name}" FontSize="23" Margin="5 0 0 0"/>
+                            </StackPanel>
+                           
                             <TextBlock Text="Оплатить до:" FontSize="23"/>
                             <TextBlock  Text="{Binding Third_part_date, StringFormat={}Оплатить до: {0}}" 
                                         x:Name="thirdpartdate"
+                                        Margin="5 0 0 0"
                                         FontSize="23"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" x:Name="fourthvisibility">
-                            <TextBlock Text="Сумма четвертой части:" FontSize="23"/>
-                            <TextBlock Text="{Binding Fourth_part, StringFormat={}Сумма четвертой части: {0}}"
+                            <StackPanel Orientation="Horizontal" Width="500">
+                                <TextBlock Text="Сумма четвертой части:" FontSize="23"/>
+                                <TextBlock Text="{Binding Fourth_part, StringFormat={}Сумма четвертой части: {0}}"
                                        x:Name="fourthpart"
-                                       FontSize="23" Width="265"/>
+                                           Margin="5 0 0 0"
+                                       FontSize="23"/>
+                                <TextBlock Text="{Binding Currencies.Name}" FontSize="23" Margin="5 0 0 0"/>
+                            </StackPanel>
+                           
                             <TextBlock Text="Оплатить до:" FontSize="23"/>
                             <TextBlock Text="{Binding Fourth_part_date, StringFormat={}Оплатить до: {0}}" 
                                        x:Name="fourthpartdate"
+                                       Margin="5 0 0 0"
                                        FontSize="23"/>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Width="500" HorizontalAlignment="Left">
+                                <TextBlock Text="Статус:" FontSize="23"/>
+                                <TextBlock Text="{Binding Statuses.name}"
+                                       Margin="5,0,0,0"
+                                       FontSize="23"/>
+                            </StackPanel>
+                            <TextBlock Text="Оплачено:" FontSize="23"/>
+                            <TextBlock x:Name="TBPayded" FontSize="23"
+                                       Margin="5 0 0 0"/>
+                            <TextBlock Text="{Binding Currencies.Name}" FontSize="23" Margin="5 0 0 0"/>
+                        </StackPanel>
                         
+
+
                         <Border Width="220"
-                                Margin="0,90,0,0"
+                                Margin="0,50,0,0"
                                 CornerRadius="15"
                                 MouseDown="MoveToEditContractPage"
                                 Height="50" 

@@ -48,22 +48,21 @@ namespace ManagementDogovorami.View.Pages
             TBManagerEdit.SelectedIndex = 0;
 
 
-            AvanceDate.BlackoutDates.AddDatesInPast();
+            //AvanceDate.BlackoutDates.AddDatesInPast();
 
-            First_part_date.BlackoutDates.AddDatesInPast();
+            //First_part_date.BlackoutDates.AddDatesInPast();
 
-            Second_part_date.BlackoutDates.AddDatesInPast();
+            //Second_part_date.BlackoutDates.AddDatesInPast();
 
-            Third_part_date.BlackoutDates.AddDatesInPast();
+            //Third_part_date.BlackoutDates.AddDatesInPast();
 
-            Fourth_part_edit.BlackoutDates.AddDatesInPast();
+            //Fourth_part_edit.BlackoutDates.AddDatesInPast();
 
             DataContext = contract;
             _currentContranct = contract;
 
             parts = contract.Parts.ToArray();
-            MessageBox.Show(parts.Count().ToString());
-            MessageBox.Show(parts.ToString());
+
             switch (parts.Count())
             {
                 case 1:
