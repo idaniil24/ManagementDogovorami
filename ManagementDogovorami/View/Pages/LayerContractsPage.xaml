@@ -81,9 +81,22 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Image Grid.Column="0" Width="150" Height="150" Source="/res/Avatar.png" >
+                                <Ellipse Height="170" Width="170">
+                                    <Ellipse.Fill>
+                                        <ImageBrush Stretch="UniformToFill">
+                                            <ImageBrush.ImageSource>
+                                                <Binding Path="Clients.Image">
+                                                    <Binding.TargetNullValue>
+                                                        <ImageSource>/res/Avatar.png</ImageSource>
+                                                    </Binding.TargetNullValue>
+                                                </Binding>
+                                            </ImageBrush.ImageSource>
+                                        </ImageBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
 
-                                </Image>
+
+
 
                                 <StackPanel Grid.Column="1"                                         
                                             HorizontalAlignment="Left"
@@ -91,11 +104,11 @@
                                             Width="650">
                                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="20,0,0,0" Width="550">
                                         <TextBlock Text="{Binding ID, StringFormat={}Номер договора: {0}}" FontSize="27"/>
-                                        <TextBlock Text="{Binding Types.Name}" FontSize="27"/>
-                                        <StackPanel Height="2" Width="250" Background="#828282" HorizontalAlignment="Left" Margin="5,10,0,0"/>
+                                        <TextBlock Text="{Binding Types.Name, StringFormat={}Тип: {0}}" FontSize="27"/>
+                                        <StackPanel Height="2" Width="250" Background="#828282" HorizontalAlignment="Left" Margin="5,5,0,0"/>
                                         <TextBlock FontSize="27">
                                             <TextBlock.Text>
-                                                <MultiBinding StringFormat="{} {0} {1} {2} | {3}">
+                                                <MultiBinding StringFormat="{}{0} {1} {2} | {3}">
                                                     <Binding Path="Clients.First_name"/>
                                                     <Binding Path="Clients.Second_name"/>
                                                     <Binding Path="Clients.Last_name"/>
@@ -103,15 +116,22 @@
                                                 </MultiBinding>
                                             </TextBlock.Text>
                                         </TextBlock>
-                                        <TextBlock Text="{Binding Clients.phone_number,StringFormat={} Номер клиента: {0}}" FontSize="27"/>
+                                        <TextBlock Text="{Binding Clients.phone_number,StringFormat={}Номер клиента: {0}}" FontSize="27"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding Price, StringFormat={}Сумма по догвоору: {0}}" FontSize="20"/>
-                                            <TextBlock Text="Оплаченно: 500000" FontSize="20" VerticalAlignment="Center" Margin="20,0,0,0"/>
+                                            <TextBlock  FontSize="20">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}Сумма по договору: {0} {1}">
+                                                        <Binding Path="Price"/>
+                                                        <Binding Path="Currencies.Name"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
                                         </StackPanel>
                                     </StackPanel>
 
                                     <Border Width="60" Height="60"
                                             Margin="10,0,0,0"
+                                            MouseDown="Border_MouseDown"
                                             Background="#C4C4C4" 
                                             HorizontalAlignment="Right"
                                             CornerRadius="100" 

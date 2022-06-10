@@ -26,5 +26,10 @@ namespace ManagementDogovorami.View.Pages
             InitializeComponent();
             LWContractsLayer.ItemsSource = currentContracts;
         }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FrameManager.MainFrame.Navigate(new ContractPage((sender as Border).DataContext as Contracts));
+        }
     }
 }

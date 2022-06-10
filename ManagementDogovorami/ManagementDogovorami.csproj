@@ -159,6 +159,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\StatusEditLayer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Windows\MainScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,6 +179,9 @@
       <DependentUpon>DogovoraPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\FrameManager.cs" />
+    <Compile Include="View\Pages\StatusEditLayer.xaml.cs">
+      <DependentUpon>StatusEditLayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>

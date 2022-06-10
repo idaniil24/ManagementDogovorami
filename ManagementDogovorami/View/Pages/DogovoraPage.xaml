@@ -137,7 +137,14 @@
                                         </TextBlock>
                                         <TextBlock Text="{Binding Clients.phone_number,StringFormat={}Номер клиента: {0}}" FontSize="27"/>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding Price, StringFormat={}Сумма по догвоору: {0}}" FontSize="20"/>
+                                            <TextBlock  FontSize="20">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}Сумма по договору: {0} {1}">
+                                                        <Binding Path="Price"/>
+                                                        <Binding Path="Currencies.Name"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
                                         </StackPanel>
                                     </StackPanel>
 

@@ -22,12 +22,22 @@ namespace ManagementDogovorami.View.Pages
     public partial class ContractPage : Page
     {
         Contracts contract;
-        int pCounts;
-        double sum;
+
+        double shtraf_first_part;
+        double shtraf_second_part;
+        double shtraf_third_part;
+        double shtrad_fourth_part;
+
+        double sumfirstpart;
+        double sumsecondpart;
+        double sumthirdpart;
+        double sumfourthpart;
+
         double oplacheno;
+        double itogsumm;
+
         private Payded[] paydeds;
         private Parts[] parts;
-        double procent = 2.4;
 
         public ContractPage(Contracts contract)
         {
@@ -38,6 +48,8 @@ namespace ManagementDogovorami.View.Pages
 
             paydeds = contract.Payded.ToArray();
 
+
+
             for (int i = 0; i < paydeds.Length; i++)
             {
                 double s = (double)paydeds[i].Sum;
@@ -45,28 +57,153 @@ namespace ManagementDogovorami.View.Pages
             }
             TBPayded.Text = oplacheno.ToString();
 
+            double secondpartprocent = 0;
+            double thirdpartprocent = 0;
+            double fourthpartprocent = 0;
 
-            //DateTime dateTime = new DateTime();
-            //dateTime = Convert.ToDateTime(first_part_date);
-
-            //if(DateTime.Now>dateTime)
-            //{
-            //    sum = sum * 2;
-            //}
-
-
-            //MessageBox.Show(sum.ToString());
-
-            sum = Convert.ToDouble(contract.Price);
-
-            DataContext = contract;
+            //заполняем масив частей
             parts = contract.Parts.ToArray();
 
-            if (DateTime.Today > Convert.ToDateTime(parts[0].Pay_day) && oplacheno < Convert.ToDouble(parts[0].Price))
+            //находим и присваиваем сумму первой части
+            sumfirstpart = (double)parts[0].Price;
+
+
+            //находим 1 процент от первой части
+            double firstpartprocent = sumfirstpart / 100;
+
+            if (parts.Length >= 2)
             {
-                sum = sum * 1.2;
+                sumsecondpart = (double)parts[1].Price;
+                secondpartprocent = sumsecondpart / 100;
+            }       
+            
+            if (parts.Length >= 3)
+            {
+                sumthirdpart = (double)parts[2].Price;
+                thirdpartprocent = sumthirdpart / 100;
             }
-            MessageBox.Show(sum.ToString());
+            
+            if (parts.Length >= 4)
+            {
+                sumfourthpart = (double)parts[3].Price;
+                fourthpartprocent = sumthirdpart / 100;
+            }
+
+            //изначально штраф по части равен нулю
+            shtraf_first_part = 0;
+            shtraf_second_part = 0;
+            shtraf_third_part = 0;
+            shtrad_fourth_part = 0;
+
+            double summadvuh = 0;
+            double summatreh = 0;
+            double summachetireh = 0;
+
+            DataContext = contract;
+
+            DateTime startfirst = Convert.ToDateTime(parts[0].Pay_day);
+
+
+
+            //заполнение штрафов по 1 части
+            for (DateTime i = startfirst; i.Date < DateTime.Today.Date; i = i.AddDays(1))
+            {
+                if (oplacheno < Convert.ToDouble(parts[0].Price))
+                {
+                    shtraf_first_part = shtraf_first_part + firstpartprocent;
+                }
+            }
+
+            
+
+            //заполнение штрафов по 2 части
+            if (parts.Length == 2)
+            {
+                summadvuh = (Convert.ToDouble(parts[0].Price) + Convert.ToDouble(parts[1].Price));
+                DateTime startsecond = Convert.ToDateTime(parts[1].Pay_day);
+                for (DateTime i = startsecond; i.Date < DateTime.Today.Date; i = i.AddDays(1))
+                {
+                    if (oplacheno < summadvuh)
+                    {
+                        shtraf_second_part = shtraf_second_part + secondpartprocent;
+                    }
+                }
+            }
+
+
+            //заполнение штрафов по 3 части
+            if (parts.Length == 3)
+            {
+
+                summadvuh = (Convert.ToDouble(parts[0].Price) + Convert.ToDouble(parts[1].Price));
+                DateTime startsecond = Convert.ToDateTime(parts[1].Pay_day);
+                for (DateTime i = startsecond; i.Date < DateTime.Today.Date; i = i.AddDays(1))
+                {
+                    if (oplacheno < summadvuh)
+                    {
+                        shtraf_second_part = shtraf_second_part + secondpartprocent;
+                    }
+                }
+
+                summatreh = (Convert.ToDouble(parts[0].Price) + Convert.ToDouble(parts[1].Price) + Convert.ToDouble(parts[2].Price));
+                DateTime startthird = Convert.ToDateTime(parts[2].Pay_day);
+                for (DateTime i = startthird; i.Date < DateTime.Today.Date; i = i.AddDays(1))
+                {
+                    if (oplacheno < summatreh)
+                    {
+                        shtraf_third_part = shtraf_third_part + thirdpartprocent;
+                    }
+                }
+            }
+
+
+            //заполнение штрафов по 4 части
+            if (parts.Length == 4)
+            {
+
+                summadvuh = (Convert.ToDouble(parts[0].Price) + Convert.ToDouble(parts[1].Price));
+                DateTime startsecond = Convert.ToDateTime(parts[1].Pay_day);
+                for (DateTime i = startsecond; i.Date < DateTime.Today.Date; i = i.AddDays(1))
+                {
+                    if (oplacheno < summadvuh)
+                    {
+                        shtraf_second_part = shtraf_second_part + secondpartprocent;
+                    }
+                }
+
+                summatreh = (Convert.ToDouble(parts[0].Price) + Convert.ToDouble(parts[1].Price) + Convert.ToDouble(parts[2].Price));
+                DateTime startthird = Convert.ToDateTime(parts[2].Pay_day);
+                for (DateTime i = startthird; i.Date < DateTime.Today.Date; i = i.AddDays(1))
+                {
+                    if (oplacheno < summatreh)
+                    {
+                        shtraf_third_part = shtraf_third_part + thirdpartprocent;
+                    }
+                }
+
+                summachetireh = (Convert.ToDouble(parts[0].Price) + Convert.ToDouble(parts[1].Price) + Convert.ToDouble(parts[2].Price) + Convert.ToDouble(parts[3].Price));
+                DateTime startfourth = Convert.ToDateTime(parts[3].Pay_day);
+                for (DateTime i = startfourth; i.Date < DateTime.Today.Date; i = i.AddDays(1))
+                {
+                    if (oplacheno < summachetireh)
+                    {
+                        shtrad_fourth_part = shtrad_fourth_part + fourthpartprocent;
+                    }
+                }
+            }
+
+            double shtraf_count = shtrad_fourth_part + shtraf_first_part + shtraf_second_part + shtraf_third_part;
+            double summ = Convert.ToDouble(contract.Price);
+            itogsumm = shtraf_count + summ;
+
+            //MessageBox.Show("Штраф по 1 части = " + shtraf_first_part);
+            //MessageBox.Show("Штраф по 2 части = " + shtraf_second_part);
+            //MessageBox.Show("Штраф по 3 части = " + shtraf_third_part);
+            //MessageBox.Show("Штраф по 4 части = " + shtrad_fourth_part);
+
+
+
+
 
             switch (parts.Count())
             {
@@ -141,16 +278,32 @@ namespace ManagementDogovorami.View.Pages
 
         private void MoveToDogovoraPage(object sender, RoutedEventArgs e)
         {
-            FrameManager.MainFrame.Navigate(new DogovoraPage());
+            if(ManagerSaver.ID == 3)
+            {
+                FrameManager.MainFrame.Navigate(new LayerContractsPage());
+            }
+            else
+            {
+                FrameManager.MainFrame.Navigate(new DogovoraPage());
+            }
         }
 
         private void MoveToEditContractPage(object sender, MouseButtonEventArgs e)
         {
-            if (contract.Stasus_id == 1)
+            if (ManagerSaver.ID == 3)
+            {
+                FrameManager.MainFrame.Navigate(new StatusEditLayer((sender as Border).DataContext as Contracts));
+            }
+            else if (contract.Stasus_id == 1)
             {
                 FrameManager.MainFrame.Navigate(new EditContractPage((sender as Border).DataContext as Contracts));
             }
             else MessageBox.Show("Данный договор уже утвержден!");
+        }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Сумма оплаты по договору: " + contract.Price + " " + contract.Currencies.Name + "\nОплаченно: " + oplacheno + " " + contract.Currencies.Name + " \nШтраф за неоплату первой части: " + shtraf_first_part + " " + contract.Currencies.Name + "\nШтраф за неуплату второй части: " + shtraf_second_part + " " + contract.Currencies.Name + "\nШтраф за неуплату третьей части: " + shtraf_third_part + " " + contract.Currencies.Name + "\nШтраф за неуплату четвертой части: " + shtrad_fourth_part + " " + contract.Currencies.Name + "\nИтоговая сумма с учетом штрафов: " + itogsumm + " " + contract.Currencies.Name);
         }
     }
 }
