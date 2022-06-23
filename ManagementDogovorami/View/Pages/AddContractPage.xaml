@@ -37,11 +37,11 @@
             <Border  Grid.Row="1" Background="White" Margin="40,20,20,20" CornerRadius="25"/>
             <StackPanel Margin="40,20,20,20">
                 <TextBlock Text="Условия договора"
-                           Margin="0,20,0,0"
+                           Margin="0,10,0,0"
                            FontSize="30" HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Выбрать клиента:" FontSize="23" 
-                               HorizontalAlignment="Left" Margin="24,45,0,0"/>
+                               HorizontalAlignment="Left" Margin="24,25,0,0"/>
                     <ComboBox x:Name="ComboClients"
                               FontSize="23"
                               SelectedItem="{Binding Clients}"
@@ -160,8 +160,7 @@
                                  SelectedDate="{Binding Date,
                                     FallbackValue={x:Static System:DateTime.Now},
                                     TargetNullValue={x:Static System:DateTime.Now}}"
-                                Margin="10,0,0,0" FontSize="23"
-                               />
+                                Margin="10,0,0,0" FontSize="23"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0,20,0,0" Name="thirdvisibility">
@@ -200,7 +199,22 @@
                                     TargetNullValue={x:Static System:DateTime.Now}}"
                                 Height="40" Margin="10,0,0,0" FontSize="23" />
                 </StackPanel>
-
+                
+                
+                
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Процент штрафных санкций:"
+                               Margin="20,20,0,0"
+                               FontSize="23"/>
+                    <TextBox x:Name="TBProcent"
+                             FontSize="23"
+                             Text="{Binding Shtraf_procent}"
+                             Width="270"
+                             PreviewTextInput="charcheck"
+                             Height="40"
+                             Margin="10 5 0 0"/>
+                </StackPanel>
 
 
 
@@ -208,7 +222,7 @@
                     MouseDown="CreateContract_Click"
                     HorizontalAlignment="Center"
                     CornerRadius="10"
-                    Margin="0 45 0 0"
+                    Margin="0 25 0 0"
                     Width="200" Height="45" 
                     Background="#57AACD">
                     <TextBlock Text="Создать" VerticalAlignment="Center"

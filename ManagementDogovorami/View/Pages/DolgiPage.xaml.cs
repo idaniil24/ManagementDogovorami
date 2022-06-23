@@ -13,18 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ManagementDogovorami
+namespace ManagementDogovorami.View.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для ClientsPage.xaml
+    /// Логика взаимодействия для DolgiPage.xaml
     /// </summary>
-    public partial class ClientsPage : Page
+    public partial class DolgiPage : Page
     {
-        public ClientsPage()
+        public DolgiPage()
         {
-            var currentClients = CM_Entitiess.GetContext().Clients.ToList();
             InitializeComponent();
-            LWClients.ItemsSource = currentClients;
+            DGridDolgi.ItemsSource = CM_Entitiess.GetContext().Contracts.Where(x=> x.Manager_id == ManagerSaver.ID).ToList();
         }
     }
 }

@@ -24,9 +24,15 @@ namespace ManagementDogovorami
     {
         public DogovoraPage()
         {
-            var currentContracts = CM_Entities.GetContext().Contracts.Where(x => x.Manager_id == ManagerSaver.ID).ToList();
+            var currentContracts = CM_Entitiess.GetContext().Contracts.Where(x => x.Manager_id == ManagerSaver.ID).ToList();
             InitializeComponent();
             LWContracts.ItemsSource = currentContracts;
+            combotypes.Items.Add("Все статусы");
+            combotypes.Items.Add("На рассмотрении");
+            combotypes.Items.Add("Утвержден");
+            combotypes.Items.Add("Отклонен");
+            combotypes.SelectedItem = 1;
+            combotypes.SelectedIndex = 0;
 
         }
 
@@ -42,18 +48,52 @@ namespace ManagementDogovorami
 
         private void updateContracts()
         {
-            var currentContracts = CM_Entities.GetContext().Contracts.Where(x => x.Manager_id == ManagerSaver.ID).ToList();
+            var currentContracts = CM_Entitiess.GetContext().Contracts.Where(x => x.Manager_id == ManagerSaver.ID).ToList();
 
             int search = 0;
-            if(CustomTextBox.Text != "")
+            if (CustomTextBoxLayer.Text != "")
             {
-                search = Convert.ToInt32(CustomTextBox.Text);
+                search = Convert.ToInt32(CustomTextBoxLayer.Text);
             }
 
-            LWContracts.ItemsSource = currentContracts.Where(x => x.ID == search && x.Manager_id == ManagerSaver.ID).ToList(); 
-            if(LWContracts.Items.Count == 0)
+            LWContracts.ItemsSource = currentContracts.Where(x => (x.ID == search) && (x.Manager_id == ManagerSaver.ID)).ToList();
+            if (LWContracts.Items.Count == 0)
             {
                 LWContracts.ItemsSource = currentContracts;
+            }
+
+            if (combotypes.SelectedIndex == 0)
+            {
+                LWContracts.ItemsSource = currentContracts.Where(x => (x.ID == search) && (x.Manager_id == ManagerSaver.ID)).ToList();
+                if (LWContracts.Items.Count == 0)
+                {
+                    LWContracts.ItemsSource = currentContracts;
+                }
+            }
+
+            if (combotypes.SelectedIndex == 1)
+            {
+                LWContracts.ItemsSource = currentContracts.Where(x => x.Stasus_id == 1 && x.ID == search && x.Manager_id == ManagerSaver.ID);
+                if (LWContracts.Items.Count == 0)
+                {
+                    LWContracts.ItemsSource = currentContracts.Where(x => x.Stasus_id == 1 && x.Manager_id == ManagerSaver.ID);
+                }
+            }
+            if (combotypes.SelectedIndex == 2)
+            {
+                LWContracts.ItemsSource = currentContracts.Where(x => x.Stasus_id == 2 && x.ID == search && x.Manager_id == ManagerSaver.ID);
+                if (LWContracts.Items.Count == 0)
+                {
+                    LWContracts.ItemsSource = currentContracts.Where(x => x.Stasus_id == 2 && x.Manager_id == ManagerSaver.ID);
+                }
+            }
+            if (combotypes.SelectedIndex == 3)
+            {
+                LWContracts.ItemsSource = currentContracts.Where(x => x.Stasus_id == 3 && x.ID == search && x.Manager_id == ManagerSaver.ID);
+                if (LWContracts.Items.Count == 0)
+                {
+                    LWContracts.ItemsSource = currentContracts.Where(x => x.Stasus_id == 3 && x.Manager_id == ManagerSaver.ID);
+                }
             }
         }
 
@@ -65,6 +105,11 @@ namespace ManagementDogovorami
         private void onlycifri(object sender, TextCompositionEventArgs e)
         {
             e.Handled = "0123456789 ,".IndexOf(e.Text) < 0;
+        }
+
+        private void combotypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            updateContracts();
         }
     }
 }

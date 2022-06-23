@@ -1,0 +1,51 @@
+﻿<Page x:Class="ManagementDogovorami.View.Pages.DolgiPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ManagementDogovorami.View.Pages"
+      Background="#E2E2E2"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="980"
+      Title="Оплаты">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#FAFAFA">
+            <TextBlock Text="Оплаты" VerticalAlignment="Center" 
+                       FontSize="40" Margin="40,0,0,0"/>
+          
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Border  Grid.Row="1" Background="White" Margin="40,20,20,20" CornerRadius="25">
+                <StackPanel Orientation="Vertical" Grid.Row="1" Margin="30">
+                    <DataGrid Grid.Row="1"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              Background="White"
+                              x:Name="DGridDolgi"
+                              Height="581">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№ договора" Width="80" Binding="{Binding ID, TargetNullValue=-}">
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Сумма по договору" Binding="{Binding Price, TargetNullValue=-}" Width="120"/>
+                            <DataGridTextColumn Header="Оплаченно" Binding="{Binding Payded, TargetNullValue=-}" Width="75"/>
+                            <DataGridTextColumn Header="Долг" Binding="{Binding Dolg, TargetNullValue=-}" Width="70"/>
+                            <DataGridTextColumn Header="Пени по авансу" Binding="{Binding Avance_shtraf, TargetNullValue=-}" Width="100"/>
+                            <DataGridTextColumn Header="Пени по первой части" Binding="{Binding FP_Peni, TargetNullValue=-}" Width="150"/>
+                            <DataGridTextColumn Header="Пени по второй части" Binding="{Binding SP_Peni, TargetNullValue=-}" Width="150"/>
+                            <DataGridTextColumn Header="Пени по третьей части" Binding="{Binding THP_Peni, TargetNullValue=-}" Width="150"/>
+                            <DataGridTextColumn Header="Пени по четвертой части" Binding="{Binding FOURP_Peni, TargetNullValue=-}" Width="150"/>
+                            <DataGridTextColumn Header="Долг с учетом пени" Binding="{Binding Shtraf, TargetNullValue=-}" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>
+

@@ -37,7 +37,19 @@
                     <StackPanel Orientation="Horizontal"                               
                                 Height="130" 
                                 VerticalAlignment="Top">
-                        <Image Source="/res/Avatar.png"  Width="120" Height="120" VerticalAlignment="Top"/>
+                        <Ellipse Height="120" Width="120">
+                            <Ellipse.Fill>
+                                <ImageBrush Stretch="UniformToFill">
+                                    <ImageBrush.ImageSource>
+                                        <Binding Path="Clients.Image">
+                                            <Binding.TargetNullValue>
+                                                <ImageSource>/res/Avatar.png</ImageSource>
+                                            </Binding.TargetNullValue>
+                                        </Binding>
+                                    </ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
                         <StackPanel Orientation="Vertical" 
                                     Width="425"
                                     Margin="20,0,0,0" Height="130" VerticalAlignment="Top">
@@ -59,14 +71,33 @@
                             </TextBlock>
                             <TextBlock Text="{Binding Clients.phone_number,StringFormat={} Номер клиента: {0}}" FontSize="23"/>
                         </StackPanel>
-                        <Border Width="230"
+
+                        <StackPanel Orientation="Vertical">
+                            <Border Width="230"
                                 Margin="64,0,0,0"
                                 CornerRadius="15"
                                 MouseDown="Border_MouseDown"
-                                Height="70"
+                                Height="60"
                                 Background="#57AACD">
-                            <TextBlock Text="Отчет о задолженности" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="White"/>
-                        </Border>
+                                <TextBlock Text="Отчет о задолженности" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="White"/>
+                            </Border>
+
+                            <Border Width="230"
+                                Margin="64,10,0,0"
+                                CornerRadius="15"
+                                VerticalAlignment="Bottom"
+                                MouseDown="MoveToPaydedPage"
+                                Height="60"
+                                Background="#57AACD">
+                                <TextBlock Text="Отчет об оплатах" 
+                                           VerticalAlignment="Center" 
+                                           HorizontalAlignment="Center" 
+                                           FontSize="20" Foreground="White"/>
+                            </Border>
+                        </StackPanel>
+                       
+
+
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="0,80,0,0">
                         <StackPanel Orientation="Horizontal">
@@ -183,9 +214,17 @@
                                        Margin="5 0 0 0"/>
                             <TextBlock Text="{Binding Currencies.Name}" FontSize="23" Margin="5 0 0 0"/>
                         </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Процент штрафных ссанкций:" FontSize="23"/>
+                            <TextBlock Text="{Binding Shtraf_procent}"
+                                       Margin="5,0,0,0"
+                                       FontSize="23"/>
+                            <TextBlock Text="%" FontSize="23"/>
+                        </StackPanel>
 
                         <Border Width="220"
-                                Margin="0,50,0,0"
+                                Margin="0,40,0,0"
                                 CornerRadius="15"
                                 MouseDown="MoveToEditContractPage"
                                 Height="50" 

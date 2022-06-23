@@ -15,22 +15,22 @@ namespace ManagementDogovorami
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class CM_Entities : DbContext
+    public partial class CM_Entitiess : DbContext
     {
-        public static CM_Entities _context;
-        public CM_Entities()
-            : base("name=CM_Entities")
+
+        private static CM_Entitiess _context;
+        public CM_Entitiess()
+            : base("name=CM_Entitiess")
         {
         }
-        public static CM_Entities GetContext()
+        
+        public static CM_Entitiess GetContext()
         {
-            if (_context==null)
-            {
-                _context = new CM_Entities();
-            }
+            if (_context == null)
+                _context = new CM_Entitiess();
             return _context;
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

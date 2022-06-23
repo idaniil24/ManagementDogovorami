@@ -35,13 +35,13 @@
         </StackPanel>
         <Grid Grid.Row="1">
             <Border  Grid.Row="1" Background="White" Margin="40,20,20,20" CornerRadius="25"/>
-            <StackPanel Margin="40,20,20,20">
+            <StackPanel Margin="40,0,20,20">
                 <TextBlock Text="Условия договора"
                            Margin="0,20,0,0"
                            FontSize="30" HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Выбрать клиента:" FontSize="23" 
-                               HorizontalAlignment="Left" Margin="24,45,0,0"/>
+                               HorizontalAlignment="Left" Margin="24,15,0,0"/>
                     <ComboBox x:Name="ComboClientsEdit"
                               FontSize="23"
                               SelectedItem="{Binding Clients}"
@@ -186,7 +186,18 @@
                                 x:Name="Fourth_part_edit"
                                 Margin="10,0,0,0" FontSize="23" />
                 </StackPanel>
-                
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Процент штрафных санкций:"
+                               Margin="20,25,0,0"
+                               FontSize="23"/>
+                    <TextBox x:Name="TBProcent"
+                             FontSize="23"
+                             Text="{Binding Shtraf_procent}"
+                             Width="270"
+                             Height="40"
+                             Margin="10 5 0 0"/>
+                </StackPanel>
 
                 <Border 
                     MouseDown="EditContract_Click"
@@ -206,8 +217,7 @@
                          SelectedIndex="0"
                          Width="200"
                          Visibility="Hidden"
-                         Height="50" />
-
+                         Height="50"/>
             </StackPanel>
         </Grid>
     </Grid>

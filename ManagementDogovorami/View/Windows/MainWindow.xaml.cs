@@ -31,6 +31,13 @@ namespace ManagementDogovorami
             login = LoginTextBox.Text;
             password = PasswordTextBox.Password;
             FrameManager.MainWindow = this;
+            //ManagerSaver.ID = 1;
+
+            //MainScreen mainScreen = new MainScreen();
+            //FrameManager.MainScreen = mainScreen;
+            //FrameManager.MainScreen.Show();
+            //FrameManager.MainWindow.Close();
+            
         }
 
         private void MoveToMainScreen(object sender, RoutedEventArgs e)
@@ -48,14 +55,14 @@ namespace ManagementDogovorami
                 MessageBox.Show("Введите пароль!");
                 return;
             }
-            else if (CM_Entities.GetContext().Manager.Where(x => x.Login == login && x.Password == password).Count() == 0)
+            else if (CM_Entitiess.GetContext().Manager.Where(x => x.Login == login && x.Password == password).Count() == 0)
             {
                 MessageBox.Show("Такого пользователя не существует!");
                 return;
             }
             else
             {
-                manager = CM_Entities.GetContext().Manager.Where(x => x.Login == login && x.Password == password).First();
+                manager = CM_Entitiess.GetContext().Manager.Where(x => x.Login == login && x.Password == password).First();
                 ManagerSaver.Login = login;
                 ManagerSaver.First_name = manager.First_name.ToString();
                 ManagerSaver.Second_name = manager.Second_name.ToString();

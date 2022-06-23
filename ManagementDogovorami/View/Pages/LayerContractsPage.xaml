@@ -20,38 +20,36 @@
             </Rectangle.Fill>
         </Rectangle>
         <StackPanel Grid.Column="0" Orientation="Horizontal">
-            <TextBlock Text="Договора" VerticalAlignment="Center" 
-                       FontSize="40" Margin="40,0,0,0"/>
+            <TextBlock Text="Договора" 
+                       VerticalAlignment="Center"
+                       FontSize="30" 
+                       Margin="40,0,0,0"/>
             <Border CornerRadius="25"
-                    Margin="40,0,0,0"
+                    Margin="20,0,0,0"
                             BorderThickness="1"
                     VerticalAlignment="Center"
                             BorderBrush="Black"
-                            Background="Transparent" Height="57" Width="500">
+                            Background="Transparent" Height="57" Width="270">
                 <Grid>
                     <TextBox VerticalAlignment="Bottom"
                                      VerticalContentAlignment="Center"
                                      x:Name="CustomTextBoxLayer"
+                                     TextChanged="CustomTextBoxLayer_TextChanged"
                                      TextWrapping="Wrap"
                                      Background="Transparent"
                                      BorderThickness="0"
                                      FontSize="20"
                                      Foreground="Gray"
                                      CaretBrush="Gray"
-                                     Margin="40,0,0,0" Height="58">
-                        <TextBox.Text>
-                            <Binding Path="Login">
-                            </Binding>
-                        </TextBox.Text>
+                                     Margin="30,0,0,0" Height="58">
                     </TextBox>
                     <TextBlock IsHitTestVisible="False"
-                                       Text="Поиск по договору"
+                                       Text="Поиск по номеру"
                                        FontSize="20"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        Margin="40,0,0,0"
-                                       Foreground="Gray" Width="439">
-
+                                       Foreground="Gray" Width="210">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -65,6 +63,31 @@
                     </TextBlock>
                 </Grid>
             </Border>
+            
+            <TextBlock Text="Поиск по стаусу: " 
+                       VerticalAlignment="Center"
+                       Margin="20 0 0 0"
+                       FontSize="25"/>
+
+            <Border Width="265" Height="60" Margin="10 0 0 0 " 
+                    Background="#ebebeb" 
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    CornerRadius="10">
+                <Grid VerticalAlignment="Center">
+                    <ComboBox Width="250" Height="50"
+                      BorderBrush="Transparent"
+                              VerticalAlignment="Center"
+                              Foreground="Black"
+                              VerticalContentAlignment="Center"
+                              FontSize="25"
+                              x:Name="combotypes"
+                      BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="itemfilter">
+                    </ComboBox>
+                </Grid>
+            </Border>
+
+            
         </StackPanel>
 
         <ListView Grid.Row="1" x:Name="LWContractsLayer"

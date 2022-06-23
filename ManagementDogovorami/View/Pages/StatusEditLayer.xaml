@@ -37,32 +37,33 @@
         <Grid Grid.Row="1">
             <Border  Grid.Row="1" Background="White" Margin="40,20,20,20" CornerRadius="25"/>
             <StackPanel Margin="40,20,20,20">
-                <TextBlock Text="Условия договора"
-                           Margin="0,20,0,0"
-                           FontSize="30" HorizontalAlignment="Center"/>
+                
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Условия договора"
+                           Margin="350,20,0,0"
+                           FontSize="30" HorizontalAlignment="Left"/>
+                    
+                </StackPanel>
+                
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Клиент:" FontSize="23" 
-                               HorizontalAlignment="Left" Margin="24,45,0,0"/>
-                    <ComboBox x:Name="ComboClientsEdit"
+                               HorizontalAlignment="Left" Margin="24,15,0,0"/>
+                    <TextBox x:Name="ComboClientsEdit"
                               FontSize="23"
-                              SelectedItem="{Binding Clients}"
+                              IsReadOnly="True"
+                             HorizontalAlignment="Center"
+                             HorizontalContentAlignment="Center"
                               Width="636" 
                               Height="40" Margin="45,0,0,0" VerticalAlignment="Bottom">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                    <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0} {1} {2} | {3}">
-                                            <Binding Path="First_name"/>
-                                            <Binding Path="Second_name"/>
-                                            <Binding Path="Last_name"/>
-                                            <Binding Path="Company_name"/>
-                                        </MultiBinding>
-                                    </TextBlock.Text>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+                        <TextBox.Text>
+                            <MultiBinding StringFormat="{}{0} {1} {2} | {3}">
+                                <Binding Path="Clients.First_name"/>
+                                <Binding Path="Clients.Second_name"/>
+                                <Binding Path="Clients.Last_name"/>
+                                <Binding Path="Clients.Company_name"/>
+                            </MultiBinding>
+                        </TextBox.Text>
+                    </TextBox>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -70,6 +71,9 @@
                                HorizontalAlignment="Left" Margin="20,15,0,0"/>
                     <TextBox x:Name="TBPriceEdit" Width="300" Height="40" 
                              FontSize="23"
+                             IsReadOnly="True"
+                             HorizontalAlignment="Center"
+                             HorizontalContentAlignment="Center"
                              TextChanged="partssummary"
                              PreviewTextInput="charcheck"
                              Text="{Binding Price}"
@@ -77,9 +81,9 @@
                              VerticalAlignment="Bottom"/>
                     <TextBlock Text="Основная валюта:" FontSize="23" 
                                HorizontalAlignment="Left" Margin="20,15,0,0"/>
-                    <ComboBox x:Name="ComboCurrencies"
-                              SelectedItem="{Binding Currencies}"  
-                              DisplayMemberPath="Name"
+                    <TextBox x:Name="ComboCurrencies"
+                              Text="{Binding Currencies.Name}"  
+                              IsReadOnly="True"
                               VerticalContentAlignment="Center"
                               FontSize="23"
                               HorizontalContentAlignment="Center"
@@ -94,14 +98,17 @@
                                HorizontalAlignment="Left" Margin="20,10,0,0"/>
                     <TextBox x:Name="TBAvanceEdit"
                              FontSize="23"
+                             HorizontalContentAlignment="Center"
                              TextChanged="partssummary"
+                             IsReadOnly="True"
                              PreviewTextInput="charcheck"
                              Text="{Binding Avance}"
                              Width="300" 
                              Height="40" Margin="81,0,0,0" VerticalAlignment="Bottom"/>
-                    <TextBlock Text="Оплатить до:" FontSize="23" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                    <TextBlock Text="Оплатить до:" FontSize="23" Margin="10,0,0,0" VerticalAlignment="Bottom" Visibility="Hidden"/>
                     <DatePicker Width="200" 
                                 Height="40" 
+                                Visibility="Hidden"
                                 x:Name="AvanceDate"
                                 Margin="10,0,0,0" FontSize="23" 
                                 SelectedDate="{Binding
@@ -112,80 +119,127 @@
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Количество частей оплаты:" FontSize="23" Margin="20,30,0,0"/>
-                    <ComboBox x:Name="ComboPartsEdit"
-                              SelectedItem="{Binding Parts_count}"
-                              
+                    <TextBox x:Name="ComboPartsEdit"
+                              IsReadOnly="True"
+                              Text="{Binding Parts_count}"
                               VerticalContentAlignment="Center"
-                              FontSize="23"
+                              FontSize="25"
                               HorizontalContentAlignment="Center"
                               Width="100" 
-                              Height="40" Margin="10,0,0,0" VerticalAlignment="Bottom" SelectionChanged="visibilitychanged"/>
+                              Height="40" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
                     <TextBlock Text="Тип:" FontSize="23" VerticalAlignment="Bottom" Margin="20,0,0,0"/>
-                    <ComboBox x:Name="TypeDogovoraEdit" Width="310" Height="40"
-                              FontSize="20"
-                              SelectedItem="{Binding Types}"
+                    <TextBox x:Name="TypeDogovoraEdit" Width="310" Height="40"
+                              FontSize="23"
+                             HorizontalContentAlignment="Center"
+                              IsReadOnly="True"
+                              Text="{Binding Types.Name}"
                               VerticalContentAlignment="Center"
-                              DisplayMemberPath="Name"
                               VerticalAlignment="Bottom" 
                               Margin="10,0,0,0"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,20,0,0" Name="firstvisibility">
-                    <TextBlock Text="Сумма первой части:" FontSize="23" 
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+
+                    <StackPanel Orientation="Horizontal"  Name="firstvisibility">
+                        <TextBlock Text="Сумма первой части:" FontSize="23" 
                                HorizontalAlignment="Left" Margin="20,10,0,0"/>
-                    <TextBox x:Name="TBFirstpart" Width="300"
+                        <TextBox x:Name="TBFirstpart" Width="200"
                              PreviewTextInput="charcheck"
+                             IsReadOnly="True"
+                                 HorizontalContentAlignment="Center"
                              TextChanged="partssummary"
                              FontSize="23"                             
                              Height="40" Margin="7,0,0,0" VerticalAlignment="Bottom"/>
-                    <TextBlock Text="Оплатить до:" FontSize="23" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
-                    <DatePicker Width="200" Height="40" 
-                                Margin="10,0,0,0" 
-                                x:Name="First_part_date"
-                                FontSize="23" 
-                                />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" Margin="0,20,0,0" Name="seconndvisibility">
-                    <TextBlock Text="Сумма второй части:" FontSize="23" 
+                    </StackPanel>
+                    
+                    
+                    <StackPanel Orientation="Horizontal"  Name="seconndvisibility">
+                        <TextBlock Text="Сумма второй части:" FontSize="23" 
                                HorizontalAlignment="Left" Margin="20,10,0,0"/>
-                    <TextBox x:Name="TBSecondpart"
+                        <TextBox x:Name="TBSecondpart"
                              TextChanged="partssummary"
+                             IsReadOnly="True"
+                                 HorizontalContentAlignment="Center"
                              PreviewTextInput="charcheck"
                              FontSize="23"
-                             Width="300" Height="40" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
-                    <TextBlock Text="Оплатить до:" FontSize="23" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                             Width="200" Height="40" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                    </StackPanel>
+                   
+                    <TextBlock Text="Оплатить до:" FontSize="23" Margin="10,0,0,0" VerticalAlignment="Bottom" Visibility="Hidden"/>
+                    <DatePicker Width="200" Height="40" 
+                                Margin="10,0,0,0" 
+                                Visibility="Hidden"
+                                x:Name="First_part_date"
+                                FontSize="23"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <StackPanel Orientation="Horizontal" Name="thirdvisibility">
+                        <TextBlock Text="Сумма третьей части:" FontSize="23" 
+                               HorizontalAlignment="Left" Margin="20,10,0,0"/>
+                        <TextBox x:Name="TBThirdpart" 
+                             TextChanged="partssummary"
+                                 HorizontalContentAlignment="Center"
+                             PreviewTextInput="charcheck"
+                             IsReadOnly="True"
+                             FontSize="23"
+                             Width="200" Height="40" Margin="4,0,0,0" VerticalAlignment="Bottom"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Name="fourthvisibility">
+                        <TextBlock Text="Сумма четвертой части:" FontSize="23" 
+                               HorizontalAlignment="Left" Margin="20,10,0,0"/>
+                        <TextBox x:Name="TBFourthpart" 
+                             TextChanged="partssummary"
+                                 HorizontalContentAlignment="Center"
+                             IsReadOnly="True"
+                             PreviewTextInput="charcheck"
+                             FontSize="23"
+                             Width="170" Height="40" Margin="7,0,0,0" VerticalAlignment="Bottom"/>
+
+                    </StackPanel>
+                   
+                    <TextBlock Text="Оплатить до:" 
+                               Visibility="Hidden"
+                               FontSize="23" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
                     <DatePicker Width="200" 
+                                Visibility="Hidden"
                                 x:Name="Second_part_date"
                                 Height="40" Margin="10,0,0,0" FontSize="23"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,20,0,0" Name="thirdvisibility">
-                    <TextBlock Text="Сумма третьей части:" FontSize="23" 
-                               HorizontalAlignment="Left" Margin="20,10,0,0"/>
-                    <TextBox x:Name="TBThirdpart" 
-                             TextChanged="partssummary"
-                             PreviewTextInput="charcheck"
-                             FontSize="23"
-                             Width="300" Height="40" Margin="4,0,0,0" VerticalAlignment="Bottom"/>
-                    <TextBlock Text="Оплатить до:" FontSize="23" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
+                <StackPanel Orientation="Horizontal" Margin="20 20 0 0">
+                    <TextBlock FontSize="23" Text="Процент штрафных ссанкций: "
+                               />
+                    <TextBlock Text="{Binding Shtraf_procent}" FontSize="23"/>
+                    <TextBlock FontSize="23" Text="%"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,50,0,0" >
+
+                    <TextBlock Text="Изменить статус договора:" FontSize="30" VerticalAlignment="Bottom" Margin="25 10 0 0"/>
+                    <ComboBox Width="220" 
+                              x:Name="ComboStatus"
+                              FontSize="23"
+                              SelectedItem="{Binding Statuses}"
+                              DisplayMemberPath="name"
+                              Height="40"
+                              Margin="20 0 0 0" VerticalAlignment="Bottom">
+
+                    </ComboBox>
+                    
+                    <TextBlock Text="Оплатить до:" FontSize="23" Margin="10,0,0,0" 
+                               Visibility="Hidden"
+                               VerticalAlignment="Bottom"/>
                     <DatePicker Width="200" 
                                 x:Name="Third_part_date"
+                                Visibility="Hidden"
                                 Height="40" Margin="10,0,0,0" FontSize="23"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,20,0,0" Name="fourthvisibility">
-                    <TextBlock Text="Сумма четвертой части:" FontSize="23" 
-                               HorizontalAlignment="Left" Margin="20,10,0,0"/>
-                    <TextBox x:Name="TBFourthpart" 
-                             TextChanged="partssummary"
-                             PreviewTextInput="charcheck"
-                             FontSize="23"
-                             Width="270" Height="40" Margin="7,0,0,0" VerticalAlignment="Bottom"/>
-                    <TextBlock Text="Оплатить до:" FontSize="23" Margin="10,0,0,0" VerticalAlignment="Bottom"/>
-                    <DatePicker Width="200" Height="40" 
-                                x:Name="Fourth_part_edit"
-                                Margin="10,0,0,0" FontSize="23" />
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0" >
+
+
+
                 </StackPanel>
 
 
@@ -193,10 +247,10 @@
                     MouseDown="EditContract_Click"
                     HorizontalAlignment="Center"
                     CornerRadius="10"
-                    Margin="0 35 0 0"
+                    Margin="0 20 0 0"
                     Width="200" Height="45" 
                     Background="#57AACD">
-                    <TextBlock Text="Изменить" VerticalAlignment="Center"
+                    <TextBlock Text="Изменить статус" VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            Foreground="White"
                            FontSize="20"/>

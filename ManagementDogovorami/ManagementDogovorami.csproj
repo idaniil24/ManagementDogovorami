@@ -126,11 +126,17 @@
     <Compile Include="View\Pages\ContractPage.xaml.cs">
       <DependentUpon>ContractPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\DolgiPage.xaml.cs">
+      <DependentUpon>DolgiPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\EditContractPage.xaml.cs">
       <DependentUpon>EditContractPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\LayerContractsPage.xaml.cs">
       <DependentUpon>LayerContractsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\PaydedPage.xaml.cs">
+      <DependentUpon>PaydedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\ProfilePage.xaml.cs">
       <DependentUpon>ProfilePage.xaml</DependentUpon>
@@ -151,11 +157,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Pages\DolgiPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Pages\EditContractPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Pages\LayerContractsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Pages\PaydedPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -240,6 +254,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="res\ivanov_ivan.jpg" />
     <Resource Include="res\menedzher.gif" />
     <Resource Include="res\logo_shorcut.png" />
     <Resource Include="res\IconApp.png" />
@@ -264,6 +279,7 @@
     <Resource Include="res\4115235_exit_logout_sign out_icon 1.png" />
     <Resource Include="res\logo_app.png" />
     <Resource Include="res\alexeyclient.jpg" />
+    <Resource Include="res\rubicon.png" />
     <Content Include="res\dogovorsvg.svg" />
     <Resource Include="res\Union.png" />
   </ItemGroup>

@@ -37,13 +37,13 @@ namespace ManagementDogovorami.View.Pages
 
             ComboPartsEdit.SelectedIndex = (int)contract.Parts_count-1;
 
-            ComboClientsEdit.ItemsSource = CM_Entities.GetContext().Clients.ToList();
+            ComboClientsEdit.ItemsSource = CM_Entitiess.GetContext().Clients.ToList();
 
-            ComboCurrencies.ItemsSource = CM_Entities.GetContext().Currencies.ToList();
+            ComboCurrencies.ItemsSource = CM_Entitiess.GetContext().Currencies.ToList();
 
-            TypeDogovoraEdit.ItemsSource = CM_Entities.GetContext().Types.ToList();
+            TypeDogovoraEdit.ItemsSource = CM_Entitiess.GetContext().Types.ToList();
 
-            TBManagerEdit.ItemsSource = CM_Entities.GetContext().Manager.Where(x => x.ID == ManagerSaver.ID).ToList();
+            TBManagerEdit.ItemsSource = CM_Entitiess.GetContext().Manager.Where(x => x.ID == ManagerSaver.ID).ToList();
 
             TBManagerEdit.SelectedIndex = 0;
 
@@ -141,44 +141,7 @@ namespace ManagementDogovorami.View.Pages
         }
         private void partssummary(object sender, TextChangedEventArgs e)
         {
-            if (((string.IsNullOrEmpty(TBAvanceEdit.Text)) == false) && ((string.IsNullOrEmpty(TBFirstpart.Text)) == false) && ((string.IsNullOrEmpty(TBPriceEdit.Text))
-                == false) && (ComboPartsEdit.SelectedIndex == 0))
-            {
-                avance = decimal.Parse(TBAvanceEdit.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                price = decimal.Parse(TBPriceEdit.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                first = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-            }
-            if (((string.IsNullOrEmpty(TBAvanceEdit.Text)) == false) && ((string.IsNullOrEmpty(TBFirstpart.Text)) == false) && ((string.IsNullOrEmpty(TBPriceEdit.Text))
-                 == false) && ((string.IsNullOrEmpty(TBSecondpart.Text)) == false) && (ComboPartsEdit.SelectedIndex == 1))
-            {
-                avance = decimal.Parse(TBAvanceEdit.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                price = decimal.Parse(TBPriceEdit.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                first = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                second = decimal.Parse(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-            }
-
-            if (((string.IsNullOrEmpty(TBAvanceEdit.Text)) == false) && ((string.IsNullOrEmpty(TBFirstpart.Text)) == false) && ((string.IsNullOrEmpty(TBPriceEdit.Text))
-                  == false) && ((string.IsNullOrEmpty(TBSecondpart.Text)) == false) && ((string.IsNullOrEmpty(TBThirdpart.Text)) == false) && (ComboPartsEdit.SelectedIndex == 1))
-            {
-                avance = decimal.Parse(TBAvanceEdit.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                price = decimal.Parse(TBPriceEdit.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                first = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                second = decimal.Parse(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                third = decimal.Parse(TBThirdpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-            }
-
-            if (((string.IsNullOrEmpty(TBAvanceEdit.Text)) == false) && ((string.IsNullOrEmpty(TBFirstpart.Text)) == false) && ((string.IsNullOrEmpty(TBPriceEdit.Text))
-                 == false) && ((string.IsNullOrEmpty(TBSecondpart.Text)) == false)
-                 && ((string.IsNullOrEmpty(TBThirdpart.Text)) == false) && ((string.IsNullOrEmpty(TBFourthpart.Text)) == false) && (ComboPartsEdit.SelectedIndex == 1))
-            {
-                avance = decimal.Parse(TBAvanceEdit.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                price = decimal.Parse(TBPriceEdit.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                first = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                second = decimal.Parse(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                third = decimal.Parse(TBThirdpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                fourth = decimal.Parse(TBFourthpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-            }
-
+            
         }
         private void charcheck(object sender, TextCompositionEventArgs e)
         {
@@ -238,18 +201,6 @@ namespace ManagementDogovorami.View.Pages
                 MessageBox.Show("Введите сумму четвертой части");
                 return;
             }
-            else if ((first + second + third + fourth) > price)
-            {
-                avance = decimal.Parse(TBAvanceEdit.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                price = decimal.Parse(TBPriceEdit.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                first = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                MessageBox.Show("Сумма всех частей не может быть больше суммы по договору!");
-                return;
-            }
-            else if ((first + second + third + fourth + avance) < price)
-            {
-                MessageBox.Show("Сумма всех частей не может быть меньше суммы по договору!");
-            }
             else if (AvanceDate.SelectedDate > First_part_date.SelectedDate)
             {
                 MessageBox.Show("Дата оплаты аванса не может быть позже чем дата оплаты первой части");
@@ -264,6 +215,38 @@ namespace ManagementDogovorami.View.Pages
             }
             else
             {
+                price = decimal.Parse(TBPriceEdit.Text);
+                avance = decimal.Parse(TBAvanceEdit.Text);
+                first = decimal.Parse(TBFirstpart.Text);
+                if (ComboPartsEdit.Text == "1")
+                {
+                    second = 0;
+                    third = 0;
+                    fourth = 0;
+                }
+                if (ComboPartsEdit.Text == "2")
+                {
+                    second = decimal.Parse(TBSecondpart.Text);
+                    third = 0;
+                    fourth = 0;
+                }
+                if (ComboPartsEdit.Text == "3")
+                {
+                    second = decimal.Parse(TBSecondpart.Text);
+                    third = decimal.Parse(TBThirdpart.Text);
+                    fourth = 0;
+                }
+                if (ComboPartsEdit.Text == "4")
+                {
+                    second = decimal.Parse(TBSecondpart.Text);
+                    third = decimal.Parse(TBThirdpart.Text);
+                    fourth = decimal.Parse(TBFourthpart.Text);
+                }
+                if (price != avance + first + second + third + fourth)
+                {
+                    MessageBox.Show("Сумма всех частей не может быть больше или меньше суммы по договору!");
+                    return;
+                }
                 int index = ComboPartsEdit.SelectedIndex;
                 _currentContranct.Avance_date = (DateTime)AvanceDate.SelectedDate;
 
@@ -271,42 +254,58 @@ namespace ManagementDogovorami.View.Pages
                 {
                     case 0:
                         ////_currentContranct.Parts[0].Pay_day = First_part_date.SelectedDate;
-                        parts[0].Price = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        parts[0].Price = Convert.ToInt32(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
                         break;
                     case 1:
                         parts[0].Pay_day = First_part_date.SelectedDate;
-                        parts[0].Price = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        parts[0].Price = Convert.ToInt32(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
                         parts[1].Pay_day = Second_part_date.SelectedDate;
-                        parts[1].Price = decimal.Parse(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        parts[1].Price = Convert.ToInt32(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
                         break;
                     case 2:
                         parts[0].Pay_day = First_part_date.SelectedDate;
-                        parts[0].Price = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        parts[0].Price = Convert.ToInt32(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
                         parts[1].Pay_day = Second_part_date.SelectedDate;
-                        parts[1].Price = decimal.Parse(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        parts[1].Price = Convert.ToInt32(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
                         parts[2].Pay_day = Third_part_date.SelectedDate;
-                        parts[2].Price = decimal.Parse(TBThirdpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        parts[2].Price = Convert.ToInt32(TBThirdpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
                         break;
                     case 3:
 
                         parts[0].Pay_day = First_part_date.SelectedDate;
-                        parts[0].Price = decimal.Parse(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        parts[0].Price = Convert.ToInt32(TBFirstpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
                         parts[1].Pay_day = Second_part_date.SelectedDate;
-                        parts[1].Price = decimal.Parse(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        parts[1].Price = Convert.ToInt32(TBSecondpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
                         parts[2].Pay_day = Third_part_date.SelectedDate;
-                        parts[2].Price = decimal.Parse(TBThirdpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        parts[2].Price = Convert.ToInt32(TBThirdpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
-                        parts[3].Pay_day = Fourth_part_edit.SelectedDate;
-                        parts[3].Price = decimal.Parse(TBFourthpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        if(parts.Count() == 4)
+                        {
+                            parts[3].Pay_day = Fourth_part_edit.SelectedDate;
+                            parts[3].Price = Convert.ToInt32(TBFourthpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                        }
+                       else
+                        {
+                            Parts part4 = new Parts();
+                            Parts part3 = new Parts();
+                            part4.Pay_day = Fourth_part_edit.SelectedDate;
+                            part3.Pay_day = Third_part_date.SelectedDate;
+                            part4.Price = Convert.ToInt32(TBFourthpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                            part3.Price = Convert.ToInt32(TBThirdpart.Text.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+                            part4.Contract_id = _currentContranct.ID;
+                            part3.Contract_id = _currentContranct.ID;
+                            CM_Entitiess.GetContext().Parts.Add(part4);
+                            CM_Entitiess.GetContext().Parts.Add(part3);
+                        }
                         break;
                 }
 
-                CM_Entities.GetContext().SaveChanges();
+                CM_Entitiess.GetContext().SaveChanges();
                 MessageBox.Show("Данные успешно изменены");
                 FrameManager.MainFrame.Navigate(new DogovoraPage());
             }

@@ -17,6 +17,7 @@ namespace ManagementDogovorami
         public int ID { get; set; }
         public Nullable<decimal> Sum { get; set; }
         public int Contract_id { get; set; }
+        public Nullable<System.DateTime> Pay_date { get; set; }
     
         public virtual Contracts Contracts { get; set; }
     }

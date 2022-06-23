@@ -23,40 +23,36 @@
             <TextBlock Text="Договора" VerticalAlignment="Center" 
                        FontSize="40" Margin="40,0,0,0"/>
             <Border CornerRadius="25"
-                    Margin="40,0,0,0"
+                    Margin="20,0,0,0"
                             BorderThickness="1"
                     VerticalAlignment="Center"
                             BorderBrush="Black"
-                            Background="Transparent" Height="57" Width="500">
+                            Background="Transparent" Height="57" Width="220">
                 <Grid>
                     <TextBox VerticalAlignment="Bottom"
                                      VerticalContentAlignment="Center"
-                                     x:Name="CustomTextBox"
+                                     x:Name="CustomTextBoxLayer"
+                                     TextChanged="textupdate"
                                      TextWrapping="Wrap"
                                      Background="Transparent"
                                      BorderThickness="0"
                                      FontSize="20"
                                      Foreground="Gray"
                                      CaretBrush="Gray"
-                                     Margin="40,0,0,0" Height="58" TextChanged="textupdate" PreviewTextInput="onlycifri">
-                        <TextBox.Text>
-                            <Binding Path="Login">
-                            </Binding>
-                        </TextBox.Text>
+                                     Margin="30,0,0,0" Height="58">
                     </TextBox>
                     <TextBlock IsHitTestVisible="False"
-                                       Text="Поиск по номеру договора"
+                                       Text="Поиск по номеру"
                                        FontSize="20"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
-                                       Margin="40,0,0,0"
-                                       Foreground="Gray" Width="439">
-
+                                       Margin="20,0,0,0"
+                                       Foreground="Gray" Width="160">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Visibility" Value="Collapsed"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Text, ElementName=CustomTextBox}" Value="">
+                                    <DataTrigger Binding="{Binding Text, ElementName=CustomTextBoxLayer}" Value="">
                                         <Setter Property="Visibility" Value="Visible"/>
                                     </DataTrigger>
                                 </Style.Triggers>
@@ -65,10 +61,33 @@
                     </TextBlock>
                 </Grid>
             </Border>
+
+            <TextBlock Text="Поиск по стаусу: " 
+                       VerticalAlignment="Center"
+                       Margin="20 0 0 0"
+                       FontSize="25"/>
+
+            <Border Width="205" Height="60" Margin="10 0 0 0 " 
+                    Background="#ebebeb" 
+                    BorderThickness="1"
+                    BorderBrush="Black"
+                    CornerRadius="10">
+                <Grid VerticalAlignment="Center">
+                    <ComboBox Width="200" Height="50"
+                      BorderBrush="Transparent"
+                              VerticalAlignment="Center"
+                              Foreground="Black"
+                              VerticalContentAlignment="Center"
+                              FontSize="25"
+                              x:Name="combotypes"
+                      BorderThickness="0" HorizontalAlignment="Center" SelectionChanged="combotypes_SelectionChanged">
+                    </ComboBox>
+                </Grid>
+            </Border>
             <Border Width="50" 
                     
                     Height="50" 
-                    Margin="40,0,0,0"
+                    Margin="15,0,0,0"
                     Background="#F1F1F1" 
                     CornerRadius="100" 
                     BorderThickness="1"

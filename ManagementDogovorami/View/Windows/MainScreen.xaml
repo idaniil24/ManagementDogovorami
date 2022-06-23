@@ -56,7 +56,21 @@
                 <Image Source="/res/3030708_group_groups_members_team_icon 1.png" Width="70" Height="70"/>
             </Border>
 
-            <Border Width="120" Height="90" Margin="0,290,0,0" MouseDown="MoveToProfilePage">
+            <Border Width="120" Height="90"
+                    Margin="0,20,0,0" MouseDown="MoveToDolgiPage">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#5EB9E9"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Image Source="/res/rubicon.png" Width="70" Height="70"/>
+            </Border>
+
+            <Border Width="120" Height="80" Margin="0,180,0,0" MouseDown="MoveToProfilePage">
                 <Border.Style>
                     <Style TargetType="{x:Type Border}">
                         <Style.Triggers>

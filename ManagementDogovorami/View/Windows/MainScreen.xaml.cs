@@ -48,7 +48,12 @@ namespace ManagementDogovorami
         private void MoveToClientsPage(object sender, MouseButtonEventArgs e)
         {
             FrameManager.MainFrame.Navigate(new ClientsPage());
-        }        
+        }
+
+        private void MoveToDolgiPage (object sender, MouseButtonEventArgs e)
+        {
+            FrameManager.MainFrame.Navigate(new DolgiPage());
+        }
 
         public static void CloseApp()
         {

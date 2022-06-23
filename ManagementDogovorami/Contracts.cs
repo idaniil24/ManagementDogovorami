@@ -18,19 +18,28 @@ namespace ManagementDogovorami
         public Contracts()
         {
             this.Parts = new HashSet<Parts>();
-            this.Payded = new HashSet<Payded>();
+            this.Payded1 = new HashSet<Payded>();
         }
     
         public int ID { get; set; }
-        public string Price { get; set; }
-        public string Avance { get; set; }
+        public int Price { get; set; }
+        public int Parts_count { get; set; }
+        public int Avance { get; set; }
         public System.DateTime Avance_date { get; set; }
-        public Nullable<int> Client_id { get; set; }
-        public Nullable<int> Manager_id { get; set; }
-        public Nullable<int> Type_id { get; set; }
-        public Nullable<int> Stasus_id { get; set; }
-        public Nullable<int> Currency_id { get; set; }
-        public Nullable<int> Parts_count { get; set; }
+        public int Client_id { get; set; }
+        public int Manager_id { get; set; }
+        public int Type_id { get; set; }
+        public int Stasus_id { get; set; }
+        public int Currency_id { get; set; }
+        public Nullable<double> Shtraf_procent { get; set; }
+        public Nullable<double> Shtraf { get; set; }
+        public Nullable<double> Avance_shtraf { get; set; }
+        public Nullable<double> Payded { get; set; }
+        public Nullable<double> FP_Peni { get; set; }
+        public Nullable<double> SP_Peni { get; set; }
+        public Nullable<double> THP_Peni { get; set; }
+        public Nullable<double> FOURP_Peni { get; set; }
+        public Nullable<double> Dolg { get; set; }
     
         public virtual Clients Clients { get; set; }
         public virtual Currencies Currencies { get; set; }
@@ -40,6 +49,6 @@ namespace ManagementDogovorami
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Parts> Parts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payded> Payded { get; set; }
+        public virtual ICollection<Payded> Payded1 { get; set; }
     }
 }
